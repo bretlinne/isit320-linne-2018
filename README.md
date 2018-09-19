@@ -6,3 +6,5 @@ I wrote this in Cloud9
 =======
 I wrote this in LUbuntu, in Geany
 
+This is my commit on pristine for merge conflict.
+
