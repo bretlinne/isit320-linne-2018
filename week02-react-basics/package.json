@@ -4,6 +4,8 @@
   "description": "Learn React Fundamentals",
   "main": "npm start",
   "scripts": {
+    "start": "node_modules/.bin/webpack-dev-server --port=30025 --mode=development",
+    "build": "node_modules/.bin/webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +21,19 @@
   "bugs": {
     "url": "https://github.com/bretlinne/isit320-linne-2018/issues"
   },
-  "homepage": "https://github.com/bretlinne/isit320-linne-2018#readme"
+  "homepage": "https://github.com/bretlinne/isit320-linne-2018#readme",
+  "dependencies": {
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "webpack-dev-server": "^3.1.9"
+  }
 }
