@@ -1,0 +1,22 @@
+{
+  "name": "week02-rest-basics",
+  "version": "1.0.0",
+  "description": "rest basics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bretlinne/isit320-linne-2018.git"
+  },
+  "keywords": [
+    "rest"
+  ],
+  "author": "Bret Linne",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/bretlinne/isit320-linne-2018/issues"
+  },
+  "homepage": "https://github.com/bretlinne/isit320-linne-2018#readme"
+}
