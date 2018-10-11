@@ -1,0 +1,18 @@
+{
+  "name": "week04-aws-setup",
+  "version": "1.0.0",
+  "description": "Ec2-provision",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "isit320-linne-2018"
+  },
+  "author": "Bret Linne",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "aws-sdk": "^2.331.0"
+  }
+}
