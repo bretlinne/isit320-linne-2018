@@ -13,6 +13,6 @@
   "author": "Bret Linne",
   "license": "GPL-3.0",
   "dependencies": {
-    "aws-sdk": "^2.331.0"
+    "aws-sdk": "^2.332.0"
   }
 }
