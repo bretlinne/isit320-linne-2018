@@ -1,2 +1,2 @@
 # server
-by Charlie Calvert
+by Charlie Calvert & Bret
