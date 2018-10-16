@@ -50,7 +50,7 @@ class App extends Component {
                     state: {this.state.status} file: {this.state.file}
                 </p>
                 <button onClick={this.queryServer}>Bar</button>
-                <button onClick={this.createEducate}>Create Educate</button>
+                <button onClick={this.createEducate}>Create</button>
             </div>
         );
     }
