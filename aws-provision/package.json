@@ -1,6 +1,6 @@
 {
     "dependencies": {
-        "aws-sdk": "^2.328.0",
+        "aws-sdk": "^2.335.0",
         "commander": "^2.18.0"
     },
     "name": "aws-elf-sample",
