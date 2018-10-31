@@ -39,7 +39,7 @@ echo $TAG_STRING
 
 
 function push_tag(){
-	gut status
+	git status
 	git add .
 	git commit -m "${TAG_STRING}" $NOW
 	git push --set-upstream origin ${BRANCH}
