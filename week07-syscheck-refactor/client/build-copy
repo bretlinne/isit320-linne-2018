@@ -14,5 +14,5 @@ function deleteOld() {
 	rm -r ${SERVER_DIR}/static
 }
 
-#deleteOld
+deleteOld
 copyNew
