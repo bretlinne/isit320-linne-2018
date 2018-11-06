@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ElfHeader from './ElfHeader';
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.dataEndPoints = ['/script-pusher/run-script?script=', '/script-pusher/run-system-tool?script='];
+        this.dataEndPoints = [
+            '/script-pusher/run-script?script=',
+            '/script-pusher/run-system-tool?script='
+        ];
         this.state = {
             allData: '',
             selectedValue: '',
@@ -18,10 +21,10 @@ class App extends Component {
             return;
         }
         fetch(path + script)
-            .then(function (response) {
+            .then(function(response) {
                 return response.json();
             })
-            .then(function (json) {
+            .then(function(json) {
                 console.log('allData', json.allData);
                 console.log('result', json.result);
                 console.log('code', json.code);
@@ -40,14 +43,17 @@ class App extends Component {
                 } else {
                     info = json.allData;
                 }
-                that.setState({allData: info});
+                that.setState({ allData: info });
             })
-            .catch(function (ex) {
-                console.log('parsing failed, URL bad, network down, or similar', ex);
+            .catch(function(ex) {
+                console.log(
+                    'parsing failed, URL bad, network down, or similar',
+                    ex
+                );
             });
     };
 
-    handleChange = (event) => {
+    handleChange = event => {
         const selectedValue = event.target.value;
         const endPointIndex = event.target.getAttribute('data-endpoint');
         console.log('HANDLE CHANGE', selectedValue);
@@ -56,13 +62,15 @@ class App extends Component {
             selectedValue: selectedValue,
             endPointIndex: endPointIndex
         });
-
     };
 
-    handleSubmit = (event) => {
-        this.setState({allData: ''});
+    handleSubmit = event => {
+        this.setState({ allData: '' });
         console.log('A name was submitted: ', this.state);
-        this.runScript(this.dataEndPoints[this.state.endPointIndex], this.state.selectedValue);
+        this.runScript(
+            this.dataEndPoints[this.state.endPointIndex],
+            this.state.selectedValue
+        );
         event.preventDefault();
     };
     render() {
@@ -71,7 +79,6 @@ class App extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <fieldset>
                         <div className="elf-form-field">
-
                             <legend>Services</legend>
                             <input
                                 type="radio"
@@ -91,29 +98,26 @@ class App extends Component {
                                 id="elf-radio-version"
                                 onChange={this.handleChange}
                             />
-                            <label htmlFor="elf-radio-version">Version Info</label>
-
+                            <label htmlFor="elf-radio-version">
+                                Version Info
+                            </label>
                         </div>
 
                         <div className="form-group">
-                            <button type="submit" className="btn btn-primary">Run System Script</button>
+                            <button type="submit" className="btn btn-primary">
+                                Run System Script
+                            </button>
                         </div>
                     </fieldset>
                 </form>
             </div>
         );
 
-
-
         return (
             <div className="App">
-                <header>
-                    <h1>System Check Refactor</h1>
-                </header>
+                <ElfHeader/>
                 <main>
-                    <section>
-                        {radioWeb}
-                    </section>
+                    <section>{radioWeb}</section>
                     <section>
                         <pre>{this.state.allData}</pre>
                     </section>
