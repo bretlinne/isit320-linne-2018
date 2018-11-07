@@ -6,8 +6,10 @@ class App extends Component {
         super(props);
         this.state = {
             allData: "unknown",
+
         };
     }
+
 
     copyScript = () => {
         const that = this;
@@ -16,7 +18,7 @@ class App extends Component {
                 return response.json();
             })
             .then(function(json) {
-                console.log('parsed json', json.allData);
+
                 that.setState({allData: json.allData});
             })
             .catch(function(ex) {

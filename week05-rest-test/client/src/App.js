@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import 'whatwg-fetch';
 
-class App extends Component {
+ gameclass App extends Component {
     constructor() {
         super();
         this.state = {
