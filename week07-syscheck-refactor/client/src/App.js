@@ -67,6 +67,8 @@ class App extends Component {
     handleSubmit = event => {
         this.setState({ allData: '' });
         console.log('A name was submitted: ', this.state);
+        console.log('path: ', this.dataEndPoints[this.state.endPointIndex]);
+        console.log('script: ', this.state.selectedValue);
         this.runScript(
             this.dataEndPoints[this.state.endPointIndex],
             this.state.selectedValue
