@@ -11,6 +11,7 @@ class App extends Component {
             '/ssh-runner/'
         ];
         this.state = {
+            foo: '',
             allData: '',
             selectedValue: '',
             endPointIndex: 0
@@ -56,10 +57,27 @@ class App extends Component {
     };
 
     runFoo = () => {
-        console.log('foo');
+        const that = this;
         fetch('/foo')
+        /* first attempt at getting the "result: 'success'" key-value pair
+            to print out to the console from the foo route in index.js (server-side)
+            It doesn't work.
+
             .then(function(response){
+                console.log('runFoo: ', response);
                 return response;
+            });
+            */
+        // 1st, we return the .json data of the response
+            .then(function (response) {
+                return response.json();
+            })
+            // 2nd we run a function on that json data, treating it as its own
+            // object.  'result' is a property of this json object
+            .then(function (json) {
+                console.log('runFoo: ', json.result);
+                that.setState({ foo: json.result });
+                return json;
             });
     };
 
@@ -144,6 +162,7 @@ class App extends Component {
                         <pre>{this.state.allData}</pre>
                     </section>
                     <button onClick={this.runFoo}>Run Foo</button>
+                    <section>{this.state.foo}</section>
                 </main>
             </div>
         );

@@ -9,7 +9,10 @@ router.get('/', function(req, res) {
 
 router.get('/foo', (request, response) => {
     'use strict';
-    response.send({result: 'success'});
+    /*(result) => {
+        console.log(JSON.stringify(result, null, 4));
+        response.send(result);*/
+    response.send({result: 'Success!'});
 });
 
 module.exports = router;
