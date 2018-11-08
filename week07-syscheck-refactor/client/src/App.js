@@ -7,7 +7,8 @@ class App extends Component {
         super(props);
         this.dataEndPoints = [
             '/script-pusher/run-script?script=',
-            '/script-pusher/run-system-tool?script='
+            '/script-pusher/run-system-tool?script=',
+            '/ssh-runner/'
         ];
         this.state = {
             allData: '',
@@ -15,6 +16,7 @@ class App extends Component {
             endPointIndex: 0
         };
     }
+
     runScript = (path, script) => {
         const that = this;
         if (!script) {
@@ -53,6 +55,14 @@ class App extends Component {
             });
     };
 
+    runFoo = () => {
+        console.log('foo');
+        fetch('/foo')
+            .then(function(response){
+                return response;
+            });
+    };
+
     handleChange = event => {
         const selectedValue = event.target.value;
         const endPointIndex = event.target.getAttribute('data-endpoint');
@@ -67,14 +77,24 @@ class App extends Component {
     handleSubmit = event => {
         this.setState({ allData: '' });
         console.log('A name was submitted: ', this.state);
-        console.log('path: ', this.dataEndPoints[this.state.endPointIndex]);
-        console.log('script: ', this.state.selectedValue);
+        //console.log('path: ', this.dataEndPoints[this.state.endPointIndex]);
+        //console.log('script: ', this.state.selectedValue);
         this.runScript(
             this.dataEndPoints[this.state.endPointIndex],
             this.state.selectedValue
         );
         event.preventDefault();
     };
+    /*
+    handleRemote = event =>{
+        this.setState({ allData: ''});
+        this.runScript(
+            this.dataEndPoints[this.state.endPointIndex],
+            this.
+        )
+    }
+    */
+
     render() {
         const radioWeb = (
             <div className="container">

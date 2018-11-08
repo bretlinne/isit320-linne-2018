@@ -11,8 +11,9 @@ var http = require('http');
 /**
  * Get port from environment and store in Express.
  */
-
+//console.log('SYSTEM CHECK REFACTOR PORT', process/env.ELF_SYSTEM_CHECK_PORT);
 var port = normalizePort(process.env.ELF_SCREF_PORT || '30030');
+//var port = normalizePort(process.env.ELF_SYSTEM_CHECK_PORT || '30034');
 app.set('port', port);
 
 /**
