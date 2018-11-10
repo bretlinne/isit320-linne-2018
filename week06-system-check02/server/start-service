@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo systemctl enable systemcheck02.service
+sudo systemctl start systemcheck02.service

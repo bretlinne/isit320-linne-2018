@@ -5,23 +5,20 @@ class App extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            allData: "unknown",
-
+            allData: 'unknown'
         };
     }
 
-
     copyScript = () => {
-
         const that = this;
         // 'fetch()' connects to the server side and looks for the 'script-pusher' route
         // within the script-pusher.js file there's a func called 'copy-script'
-        console.log('foo');
+//        console.log('foo');
         fetch('/script-pusher/copy-script')
-            /**************************************************************************/
-            // ORIGINAL SCRIPT
-            // this '.then(func(resp...)) receives data from the fetch above. It returns it to
-            //
+        /**************************************************************************/
+        // ORIGINAL SCRIPT
+        // this '.then(func(resp...)) receives data from the fetch above. It returns it to
+        //
             .then(function(response) {
                 return response.json();
             })
@@ -37,12 +34,12 @@ class App extends Component {
             })
             /**************************************************************************/
             /**************************************************************************
-            // COMPARE: If we rename all instances of 'response' with 'foo', the code still
+             // COMPARE: If we rename all instances of 'response' with 'foo', the code still
              works just fine.  Try commenting out the above .thens and un-commenting these
-            .then(function(foo) {
+             .then(function(foo) {
                 return foo.json();
             })
-            .then(function(foo) {
+             .then(function(foo) {
                 that.setState({allData: foo.allData});
             })
              ***************************************************************************/
@@ -65,6 +62,7 @@ class App extends Component {
                     <p>&copy; by Bret Linne</p>
                 </footer>
             </div>
+
         );
     }
 }

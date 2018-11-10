@@ -1,6 +1,6 @@
 [Unit]
 Description=System Check Service
-
+After=network.target
 [Service]
 ExecStart=/home/bcuser/npm/bin/npm run start-service
 WorkingDirectory=/home/bcuser/bin/systemcheck
@@ -12,6 +12,25 @@ User=bcuser
 Group=bcuser
 Environment=NODE_ENV=production
 Environment=SERVER_PORT=30033
+[Install]
+WantedBy=multi-user.target
+
+[Unit]
+Description=Run NodeRouteBasics
+After=network.target
+
+[Service]
+# ExecStart=/usr/bin/node ./bin/www
+ExecStart=/home/ubuntu/npm/bin/npm run start-service
+WorkingDirectory=/home/ubuntu/bin/rbs2
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=nrb
+User=ubuntu
+Group=ubuntu
+Environment=NODE_ENV=production
+Environment=RBS2_PORT=30026
 
 [Install]
 WantedBy=multi-user.target
