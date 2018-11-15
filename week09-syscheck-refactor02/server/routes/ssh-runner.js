@@ -62,8 +62,7 @@ const runCpuInfo = (hostAddress, response) => {
 router.get('/uptime', (request, response) => {
     console.log('run-get-started called in ssh-runner', hostAddress);
     runCpuInfo(hostAddress, event);
-    //getSshIp()
-    //    .then
+
 
     // this needs 'response' because it has a 'send' method
     // that allows sending data back to the client

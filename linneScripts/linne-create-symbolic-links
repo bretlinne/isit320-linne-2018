@@ -32,7 +32,6 @@ fi
 if [ ! -n "$LINNE_SCRIPTS" ]; then
     printf "${LT_BLUE}\n => Creating LINNE_SCRIPTS variable.$NC"
     LINNE_SCRIPTS=$HOME/Git/isit320-linne-2018/linneScripts
-    #LINNE_SCRIPTS=$HOME/Git/isit320-linne-2018/linneScripts 
 else
     printf "${GREEN}\n => LINNE_SCRIPTS environment variable already exists.$NC"
 fi
