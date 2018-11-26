@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo systemctl stop practiceScref.service
+sudo systemctl disable practiceScref.service

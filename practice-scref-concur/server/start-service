@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo systemctl enable practiceScref.service
+sudo systemctl start practiceScref.service

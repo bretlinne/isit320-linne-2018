@@ -1,0 +1,9 @@
+#! /bin/bash
+
+function copyService() {
+    sudo cp -v practiceSysCheck.service /etc/systemd/system/.
+    sudo systemctl enable practiceSysCheck.service
+    sudo systemctl start practiceSysCheck.service
+}
+
+copyService

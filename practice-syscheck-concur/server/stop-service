@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo systemctl stop practiceSysCheck.service
+sudo systemctl disable practiceSysCheck.service
