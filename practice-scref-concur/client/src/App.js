@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import RadioLocal from './RadioLocal';
+import RadioRemote from './RadioRemote';
+import LinneHeader from './LinneHeader';
 
 class App extends Component {
     constructor(props) {
@@ -30,11 +32,10 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <header>
-                    <h1>Practice System Check Refactor</h1>
-                </header>
+                <LinneHeader/>
                 <main>
                     <RadioLocal/>
+                    <RadioRemote/>
                 </main>
                 <footer>
                     <p>&copy; by Bret Linne</p>

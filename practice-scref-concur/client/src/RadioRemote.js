@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
 
-// RadioLocal
+// RadioRemote
 // --this is a script that designates that CpuInfo and SystemCheck
 // --will be invoked on the local system, not a remote one
-class RadioLocal extends Component {
+class RadioRemote extends Component {
     constructor(props) {
         super(props);
         this.dataEndPoints = [
-            '/script-pusher/run-script?script=',        // dataEndpoint #0
-            '/script-pusher/run-system-tool?script='    // dataEndpoint #1
+            '/ssh-runner/',                             // 0
+            //'/script-pusher/run-script?script=',      // 1; radioLocal copy
+            //'/script-pusher/run-system-tool?script='  // 2; radioLocal copy
         ];
         this.state = {
             allData: '',
@@ -79,44 +80,31 @@ class RadioLocal extends Component {
         event.preventDefault();
     };
 
+
+    handleRemote = event => {
+        this.setState({ allData: '' });
+        this.runScript(
+            this.dataEndPoints[this.state.endPointIndex],
+            this.state.selectedValue
+        );
+        event.preventDefault();
+    };
     render() {
-        const radioLocal = (
+        const radioRemote = (
             <div className="container">
                 <form onSubmit={this.handleSubmit}>
                     <fieldset>
                         <div className="elf-form-field">
-                            <legend>Local Services</legend>
+                            <legend>Remote Services</legend>
                             <input
                                 type="radio"
                                 name="app-choice"
                                 data-endpoint="0"
-                                value="CpuInfo"
-                                id="elf-radio-cpu"
-                                onChange={this.handleChange}
-                            />
-                            <label htmlFor="elf-radio-cpu">CpuInfo</label>
-
-                            <input
-                                type="radio"
-                                name="app-choice"
-                                data-endpoint="0"
-                                value="VersionCheck"
-                                id="elf-radio-version"
-                                onChange={this.handleChange}
-                            />
-                            <label htmlFor="elf-radio-version">
-                                Version Info
-                            </label>
-                            <input
-                                type="radio"
-                                name="app-choice"
-                                data-endpoint="1"
                                 value="Uptime"
                                 id="elf-radio-uptime"
                                 onChange={this.handleChange}
                             />
                             <label htmlFor="elf-radio-cpu">Uptime</label>
-
                         </div>
 
                         <div className="form-group">
@@ -132,7 +120,7 @@ class RadioLocal extends Component {
         return (
             <div className="App">
                 <main>
-                    <section>{radioLocal}</section>
+                    <section>{radioRemote}</section>
                     <section>
                         <pre>{this.state.allData}</pre>
                     </section>
@@ -142,4 +130,4 @@ class RadioLocal extends Component {
     }
 }
 
-export default RadioLocal;
+export default RadioRemote;
