@@ -70,8 +70,8 @@ class RadioLocal extends Component {
     handleSubmit = event => {
         this.setState({ allData: '' });
         console.log('A name was submitted: ', this.state);
-        //console.log('path: ', this.dataEndPoints[this.state.endPointIndex]);
-        //console.log('script: ', this.state.selectedValue);
+        console.log('path: ', this.dataEndPoints[this.state.endPointIndex]);
+        console.log('script: ', this.state.selectedValue);
         this.runScript(
             this.dataEndPoints[this.state.endPointIndex],
             this.state.selectedValue
@@ -80,7 +80,7 @@ class RadioLocal extends Component {
     };
 
     render() {
-        const radioWeb = (
+        const radioLocal = (
             <div className="container">
                 <form onSubmit={this.handleSubmit}>
                     <fieldset>
@@ -107,6 +107,16 @@ class RadioLocal extends Component {
                             <label htmlFor="elf-radio-version">
                                 Version Info
                             </label>
+                            <input
+                                type="radio"
+                                name="app-choice"
+                                data-endpoint="1"
+                                value="Uptime"
+                                id="elf-radio-uptime"
+                                onChange={this.handleChange}
+                            />
+                            <label htmlFor="elf-radio-cpu">Uptime</label>
+
                         </div>
 
                         <div className="form-group">
@@ -122,7 +132,7 @@ class RadioLocal extends Component {
         return (
             <div className="App">
                 <main>
-                    <section>{radioWeb}</section>
+                    <section>{radioLocal}</section>
                     <section>
                         <pre>{this.state.allData}</pre>
                     </section>

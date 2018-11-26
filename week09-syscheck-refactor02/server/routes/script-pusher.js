@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 const spawn = require('child_process').spawn;
 
-let allData = "";
 
-const runSystemTool = script =>{
-    return new Promise(function(resolve, reject){
+
+const runSystemTool = script => {
+    return new Promise(function(resolve, reject) {
         console.log('System TOOL ENVIRONMENT', process.env.bash);
     });
-}
+};
 
 //const check = script => {
 //};
@@ -16,9 +16,8 @@ const runSystemTool = script =>{
 
 /* END MIDDLEWARE */
 
-const scriptRunner = (script) => {
-
-    return new Promise(function (resolve, reject) {
+const scriptRunner = script => {
+    return new Promise(function(resolve, reject) {
         allData = '';
         //console.log("Run CpuInfo on LocalSystem", process.env.SETUP_LINUXBOX);
         //console.log("Run a specified script on LocalSystem",
@@ -27,19 +26,19 @@ const scriptRunner = (script) => {
         //const pushScript = spawn(process.env.SETUP_LINUXBOX + '/CpuInfo');
         const pushScript = spawn(process.env.SETUP_LINUXBOX + '/' + script);
 
-        pushScript.stdout.on('data', (data) => {
+        pushScript.stdout.on('data', data => {
             console.log(`child stdout:\n${data}`);
             allData += 'PUSH-SCRIPT: ' + data;
             //console.log('PUSH', data);
         });
 
-        pushScript.stderr.on('data', (data) => {
+        pushScript.stderr.on('data', data => {
             console.log(`child stderr:\n${data}`);
             allData += 'PUSH-SCRIPT: ' + data;
             //console.error('PUSH', data);
         });
 
-        pushScript.on('close', (code) => {
+        pushScript.on('close', code => {
             resolve({
                 result: 'success',
                 allData: allData,
@@ -47,7 +46,7 @@ const scriptRunner = (script) => {
             });
         });
 
-        pushScript.on('error', (code) => {
+        pushScript.on('error', code => {
             reject({
                 result: 'error',
                 code: code
@@ -80,11 +79,11 @@ router.get('/run-script', function(request, response) {
     // this line below is just a sanity check for debugging
     //response.send({results: request.query.script})
     scriptRunner(request.query.script)
-        .then((result) => {
+        .then(result => {
             console.log(JSON.stringify(result, null, 4));
             response.send(result);
         })
-        .catch((err) => {
+        .catch(err => {
             console.log(err);
             response.send(err);
         });

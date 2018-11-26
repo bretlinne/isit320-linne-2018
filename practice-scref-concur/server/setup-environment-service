@@ -12,7 +12,7 @@ NC='\033[0m' # No Color
 # Then run: source setup-environment-service
 export SYSTEMD_PROJECT_NAME=practiceScref
 export SYSTEMD_DESCRIPTION="Practice System Check Refactor"
-export SYSTEMD_PORT="SERVER_PORT=30033"
+export SYSTEMD_PORT="LINNE_SERVER_PORT=30030" #should be ELF_SERVER_PORT ?
 
 # This export does not need to be edited. It is derived from the lines above.
 export SERVICE_FILE=$SYSTEMD_PROJECT_NAME.service

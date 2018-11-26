@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import RadioLocal from './RadioLocal';
 
 class App extends Component {
     constructor(props) {
@@ -34,8 +34,7 @@ class App extends Component {
                     <h1>Practice System Check Refactor</h1>
                 </header>
                 <main>
-                    <button onClick={this.systemCheck}>CpuInfo</button>
-                    <pre>{this.state.allData}</pre>
+                    <RadioLocal/>
                 </main>
                 <footer>
                     <p>&copy; by Bret Linne</p>

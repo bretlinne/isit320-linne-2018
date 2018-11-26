@@ -4,9 +4,7 @@ import './App.css';
 class RadioRemote extends Component {
     constructor(props) {
         super(props);
-        this.dataEndPoints = [
-            '/ssh-runner/'
-        ];
+        this.dataEndPoints = ['/ssh-runner/'];
         this.state = {
             allData: '',
             selectedValue: '',
@@ -75,15 +73,14 @@ class RadioRemote extends Component {
         event.preventDefault();
     };
 
-    handleRemote = event =>{
-        this.setState({ allData: ''});
+    handleRemote = event => {
+        this.setState({ allData: '' });
         this.runScript(
             this.dataEndPoints[this.state.endPointIndex],
             this.state.selectedValue
         );
         event.preventDefault();
-    }
-
+    };
 
     render() {
         const radioRemote = (
@@ -119,7 +116,6 @@ class RadioRemote extends Component {
                     <section>
                         <pre>{this.state.allData}</pre>
                     </section>
-
                 </main>
             </div>
         );

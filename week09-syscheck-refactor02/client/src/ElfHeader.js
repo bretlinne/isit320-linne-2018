@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 class ElfHeader extends Component {
-
     render() {
         return (
             <div className="App">
@@ -14,4 +13,4 @@ class ElfHeader extends Component {
     }
 }
 
-export default ElfHeader
+export default ElfHeader;

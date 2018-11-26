@@ -31,9 +31,9 @@ const runCpuInfo = (hostAddress, response) => {
                 .on('close', function(code, signal) {
                     console.log(
                         'Stream :: close :: code: ' +
-                        code +
-                        ', signal: ' +
-                        signal
+                            code +
+                            ', signal: ' +
+                            signal
                     );
                     conn.end();
                     response.send({ result: 'success', allData: allData });
@@ -47,8 +47,8 @@ const runCpuInfo = (hostAddress, response) => {
                     allData += data;
                 });
         });
-    //this is for when we actually conn to the server
-    //this also appears to run before the code above
+        //this is for when we actually conn to the server
+        //this also appears to run before the code above
     }).connect({
         host: hostAddress,
         port: 22,
@@ -62,7 +62,6 @@ const runCpuInfo = (hostAddress, response) => {
 router.get('/uptime', (request, response) => {
     console.log('run-get-started called in ssh-runner', hostAddress);
     runCpuInfo(hostAddress, event);
-
 
     // this needs 'response' because it has a 'send' method
     // that allows sending data back to the client

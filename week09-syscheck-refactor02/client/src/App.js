@@ -15,7 +15,7 @@ class App extends Component {
     runFoo = () => {
         const that = this;
         fetch('/foo')
-        /* first attempt at getting the "result: 'success'" key-value pair
+            /* first attempt at getting the "result: 'success'" key-value pair
             to print out to the console from the foo route in index.js (server-side)
             It doesn't work.
 
@@ -24,13 +24,13 @@ class App extends Component {
                 return response;
             });
             */
-        // 1st, we return the .json data of the response
-            .then(function (response) {
+            // 1st, we return the .json data of the response
+            .then(function(response) {
                 return response.json();
             })
             // 2nd we run a function on that json data, treating it as its own
             // object.  'result' is a property of this json object
-            .then(function (json) {
+            .then(function(json) {
                 console.log('runFoo: ', json.result);
                 that.setState({ foo: json.result });
                 return json;
@@ -41,10 +41,10 @@ class App extends Component {
         //radio local now has the RadioWeb method that used to be here
         return (
             <div className="App">
-                <ElfHeader/>
+                <ElfHeader />
                 <main>
-                    <RadioLocal/>
-                    <RadioRemote/>
+                    <RadioLocal />
+                    <RadioRemote />
                     <button onClick={this.runFoo}>Run Foo</button>
                     <section>{this.state.foo}</section>
                 </main>

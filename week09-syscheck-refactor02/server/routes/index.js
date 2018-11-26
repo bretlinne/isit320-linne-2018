@@ -12,7 +12,7 @@ router.get('/foo', (request, response) => {
     /*(result) => {
         console.log(JSON.stringify(result, null, 4));
         response.send(result);*/
-    response.send({result: 'Success!'});
+    response.send({ result: 'Success!' });
 });
 
 module.exports = router;
