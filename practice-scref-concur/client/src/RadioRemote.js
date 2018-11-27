@@ -8,9 +8,7 @@ class RadioRemote extends Component {
     constructor(props) {
         super(props);
         this.dataEndPoints = [
-            '/ssh-runner/',                             // 0
-            //'/script-pusher/run-script?script=',      // 1; radioLocal copy
-            //'/script-pusher/run-system-tool?script='  // 2; radioLocal copy
+            '/ssh-runner/' // 0
         ];
         this.state = {
             allData: '',
@@ -80,15 +78,6 @@ class RadioRemote extends Component {
         event.preventDefault();
     };
 
-
-    handleRemote = event => {
-        this.setState({ allData: '' });
-        this.runScript(
-            this.dataEndPoints[this.state.endPointIndex],
-            this.state.selectedValue
-        );
-        event.preventDefault();
-    };
     render() {
         const radioRemote = (
             <div className="container">
@@ -100,11 +89,21 @@ class RadioRemote extends Component {
                                 type="radio"
                                 name="app-choice"
                                 data-endpoint="0"
-                                value="Uptime"
-                                id="elf-radio-uptime"
+                                value="uptime"
+                                id="elf-uptime-remote"
                                 onChange={this.handleChange}
                             />
-                            <label htmlFor="elf-radio-cpu">Uptime</label>
+                            <label htmlFor="elf-uptime-remote">Uptime</label>
+
+                            <input
+                                type="radio"
+                                name="app-choice"
+                                data-endpoint="0"
+                                value="cpu-info"
+                                id="elf-radio-cpu"
+                                onChange={this.handleChange}
+                            />
+                            <label htmlFor="elf-radio-cpu">CpuInfo</label>
                         </div>
 
                         <div className="form-group">

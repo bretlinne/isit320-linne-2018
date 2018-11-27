@@ -17,15 +17,21 @@ let allData = '';
 }
 
 */
-/*
+
 // ---------------------
 // run CPU Info Remote
 // ---------------------
-* const runCpuInfoRemote = (hostAddress, response) => {
+const runCpuInfoRemote = (hostAddress, response) => {
+    // create new inst. of client and get conn obj back
     var conn = new Client();
+    var commandPath =
+        '/home/ubuntu/Git/JsObjects/Utilities/SetupLinuxBox/CpuInfo';
+    // "when you est conn w/ server, run this code":
     conn.on('ready', function() {
         console.log('Client :: ready');
-        conn.exec('~/CpuInfo', function(err, stream) {
+        conn.exec(commandPath, function(err, stream) {
+            // this is starting a stream to send command to server and get
+            // data back from it
             if (err) throw err;
             stream
                 .on('close', function(code, signal) {
@@ -47,6 +53,8 @@ let allData = '';
                     allData += data;
                 });
         });
+        //this is for when we actually conn to the server
+        //this also appears to run before the code above
     }).connect({
         host: hostAddress,
         port: 22,
@@ -56,7 +64,7 @@ let allData = '';
         )
     });
 };
-*/
+
 const runUptimeRemote = (hostAddress, response) => {
     // create new inst. of client and get conn obj back
     var conn = new Client();
@@ -64,7 +72,7 @@ const runUptimeRemote = (hostAddress, response) => {
     // "when you est conn w/ server, run this code":
     conn.on('ready', function() {
         console.log('Client :: ready');
-        conn.exec('usr/bin/uptime', function(err, stream) {
+        conn.exec('/usr/bin/uptime', function(err, stream) {
             // this is starting a stream to send command to server and get
             // data back from it
             if (err) throw err;
@@ -101,12 +109,17 @@ const runUptimeRemote = (hostAddress, response) => {
 };
 
 router.get('/uptime', (request, response) => {
+    allData = '';
     console.log('run-uptime-remote called in ssh-runner', hostAddress);
-    runUptimeRemote(hostAddress, event);
-
     // this needs 'response' because it has a 'send' method
     // that allows sending data back to the client
     runUptimeRemote(hostAddress, response);
+});
+
+router.get('/cpu-info', (request, response) => {
+    allData = '';
+    console.log('run-cpu-info called in ssh-runner', hostAddress);
+    runCpuInfoRemote(hostAddress, response);
 });
 
 module.exports = router;

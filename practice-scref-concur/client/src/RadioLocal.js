@@ -8,8 +8,8 @@ class RadioLocal extends Component {
     constructor(props) {
         super(props);
         this.dataEndPoints = [
-            '/script-pusher/run-script?script=',        // dataEndpoint #0
-            '/script-pusher/run-system-tool?script='    // dataEndpoint #1
+            '/script-pusher/run-script?script=', // dataEndpoint #0
+            '/script-pusher/run-system-tool?script=' // dataEndpoint #1
         ];
         this.state = {
             allData: '',
@@ -116,7 +116,6 @@ class RadioLocal extends Component {
                                 onChange={this.handleChange}
                             />
                             <label htmlFor="elf-radio-cpu">Uptime</label>
-
                         </div>
 
                         <div className="form-group">

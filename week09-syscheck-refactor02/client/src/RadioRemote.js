@@ -73,19 +73,10 @@ class RadioRemote extends Component {
         event.preventDefault();
     };
 
-    handleRemote = event => {
-        this.setState({ allData: '' });
-        this.runScript(
-            this.dataEndPoints[this.state.endPointIndex],
-            this.state.selectedValue
-        );
-        event.preventDefault();
-    };
-
     render() {
         const radioRemote = (
             <div className="container">
-                <form onSubmit={this.handleRemote}>
+                <form onSubmit={this.handleSubmit}>
                     <fieldset>
                         <div className="elf-form-field">
                             <legend>Remote Services</legend>
@@ -93,11 +84,21 @@ class RadioRemote extends Component {
                                 type="radio"
                                 name="app-choice"
                                 data-endpoint="0"
-                                value="uptime"
+                                value="cpu-info"
                                 id="elf-radio-cpu"
                                 onChange={this.handleChange}
                             />
-                            <label htmlFor="elf-radio-cpu">Uptime</label>
+                            <label htmlFor="elf-radio-cpu">CpuInfo</label>
+
+                            <input
+                                type="radio"
+                                name="app-choice"
+                                data-endpoint="0"
+                                value="uptime"
+                                id="elf-uptime-remote"
+                                onChange={this.handleChange}
+                            />
+                            <label htmlFor="elf-uptime-remote">Uptime</label>
                         </div>
 
                         <div className="form-group">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-
+//Bret Linne Midterm
+//Practice System Check Refactor
 class LinneHeader extends Component {
     render() {
         return (

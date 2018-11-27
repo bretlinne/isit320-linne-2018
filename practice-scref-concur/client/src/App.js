@@ -32,10 +32,10 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <LinneHeader/>
+                <LinneHeader />
                 <main>
-                    <RadioLocal/>
-                    <RadioRemote/>
+                    <RadioLocal />
+                    <RadioRemote />
                 </main>
                 <footer>
                     <p>&copy; by Bret Linne</p>

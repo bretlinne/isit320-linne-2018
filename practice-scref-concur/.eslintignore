@@ -10,3 +10,7 @@
 **/manifest.json
 **/precache-manifest.*.js
 **/service-worker.js
+**public/static**
+/public/static/
+service-worker.js
+precache-manifest.*.js

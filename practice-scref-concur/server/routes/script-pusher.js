@@ -6,7 +6,7 @@ const uptimePath = '/usr/bin/uptime';
 let allData = '';
 
 const runSystemTool = () => {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         console.log('Run Uptime on LocalSystem', uptimePath);
         /**/
         const invokeCommand = spawn(uptimePath);
@@ -35,7 +35,6 @@ const runSystemTool = () => {
                 code: code
             });
         });
-
     });
 };
 const runScript = script => {
