@@ -27,7 +27,8 @@ app.use('/script-pusher', scriptPusher);
 app.use('/ssh-runner', sshRunner);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) { 'use strict';
+app.use(function(req, res, next) {
+    'use strict';
     'use strict';
     next(createError(404));
 });

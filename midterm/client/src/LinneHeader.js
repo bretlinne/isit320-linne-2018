@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
 
-class ElfHeader extends Component {
-
+class LinneHeader extends Component {
     render() {
         return (
             <div className="App">
                 <header>
-                    <h1>System Check Refactor02</h1>
+                    <h1>Bret Linne Midterm</h1>
                 </header>
             </div>
         );
     }
 }
 
-export default ElfHeader
+export default LinneHeader;

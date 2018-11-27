@@ -1,13 +1,13 @@
 {
-  "name": "elven-project",
+  "name": "midterm",
   "version": "0.0.0",
   "authors": [
-    "Charlie Calvert"
+    "Bret Linne"
   ],
-  "description": "Angular Unit Tests",
+  "description": "midterm stuff",
   "keywords": [],
   "license": "MIT",
-  "homepage": "http://www.elvenware.com",
+  "homepage": "",
   "ignore": [
     "**/.*",
     "node_modules",

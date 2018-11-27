@@ -1,4 +1,6 @@
 **/build/**
+**/public/static/**
+**/public/javascripts/**
 **/serviceWorker.js
-**/build/**
-**/serviceWorker.js
+service-worker.js
+precache-manifest.*.js

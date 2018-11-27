@@ -1,45 +1,27 @@
 var express = require('express');
 var router = express.Router();
+
 const spawn = require('child_process').spawn;
+const uptimePath = '/usr/bin/uptime';
+let allData = '';
 
-let allData = "";
-
-const runSystemTool = script =>{
-    return new Promise(function(resolve, reject){
-        console.log('System TOOL ENVIRONMENT', process.env.bash);
-    });
-}
-
-//const check = script => {
-//};
-//router.use(check);
-
-/* END MIDDLEWARE */
-
-const scriptRunner = (script) => {
-
-    return new Promise(function (resolve, reject) {
-        allData = '';
-        //console.log("Run CpuInfo on LocalSystem", process.env.SETUP_LINUXBOX);
-        //console.log("Run a specified script on LocalSystem",
-        //    process.env.SETUP_LINUXBOX);
-
-        //const pushScript = spawn(process.env.SETUP_LINUXBOX + '/CpuInfo');
-        const pushScript = spawn(process.env.SETUP_LINUXBOX + '/' + script);
-
-        pushScript.stdout.on('data', (data) => {
+const runSystemTool = () => {
+    return new Promise(function(resolve, reject) {
+        console.log('Run Uptime on LocalSystem', uptimePath);
+        /**/
+        const invokeCommand = spawn(uptimePath);
+        invokeCommand.stdout.on('data', data => {
             console.log(`child stdout:\n${data}`);
-            allData += 'PUSH-SCRIPT: ' + data;
-            //console.log('PUSH', data);
+            allData += 'UPTIME: ' + data;
         });
 
-        pushScript.stderr.on('data', (data) => {
+        invokeCommand.stderr.on('data', data => {
             console.log(`child stderr:\n${data}`);
-            allData += 'PUSH-SCRIPT: ' + data;
+            allData += 'UPTIME: ' + data;
             //console.error('PUSH', data);
         });
 
-        pushScript.on('close', (code) => {
+        invokeCommand.on('close', code => {
             resolve({
                 result: 'success',
                 allData: allData,
@@ -47,7 +29,42 @@ const scriptRunner = (script) => {
             });
         });
 
-        pushScript.on('error', (code) => {
+        invokeCommand.on('error', code => {
+            reject({
+                result: 'error',
+                code: code
+            });
+        });
+    });
+};
+const runScript = script => {
+    return new Promise(function(resolve, reject) {
+        console.log('Run CpuInfo on LocalSystem', process.env.SETUP_LINUXBOX);
+
+        //const pushScript = spawn(process.env.SETUP_LINUXBOX + '/CpuInfo');
+        const pushScript = spawn(process.env.SETUP_LINUXBOX + '/' + script);
+        console.log('bar');
+        pushScript.stdout.on('data', data => {
+            console.log(`child stdout:\n${data}`);
+            allData += 'PUSH-SCRIPT: ' + data;
+            //console.log('PUSH', data);
+        });
+
+        pushScript.stderr.on('data', data => {
+            console.log(`child stderr:\n${data}`);
+            allData += 'PUSH-SCRIPT: ' + data;
+            //console.error('PUSH', data);
+        });
+
+        pushScript.on('close', code => {
+            resolve({
+                result: 'success',
+                allData: allData,
+                code: code
+            });
+        });
+
+        pushScript.on('error', code => {
             reject({
                 result: 'error',
                 code: code
@@ -56,35 +73,31 @@ const scriptRunner = (script) => {
     });
 };
 
-/*
-const runSystemTool = script => {
-router.get('/run-system-tool', (request, response) => {
-    'use strict';
-    allData='';
-    console.log('QUERY IN RUN SYSTEM TOOL', request.query);
-    runSystemTool(request.query.script)
-        .then((result)=>{
-            response.send(result);
-        })
-        .catch((err) => {
-            console.log(err);
-            response.send(err);
-        });
-    };
-});
-*/
-
 router.get('/run-script', function(request, response) {
     'use strict';
-    console.log('QUERY', request.query.script);
-    // this line below is just a sanity check for debugging
-    //response.send({results: request.query.script})
-    scriptRunner(request.query.script)
-        .then((result) => {
+    console.log('QUERY: ', request.query.script);
+    allData = '';
+    runScript(request.query.script)
+        .then(result => {
             console.log(JSON.stringify(result, null, 4));
             response.send(result);
         })
-        .catch((err) => {
+        .catch(err => {
+            console.log(err);
+            response.send(err);
+        });
+});
+
+router.get('/run-system-tool', function(request, response) {
+    'use strict';
+    console.log('QUERY: ', request.query.script);
+    allData = '';
+    runSystemTool(request.query.script)
+        .then(result => {
+            console.log(JSON.stringify(result, null, 4));
+            response.send(result);
+        })
+        .catch(err => {
             console.log(err);
             response.send(err);
         });
