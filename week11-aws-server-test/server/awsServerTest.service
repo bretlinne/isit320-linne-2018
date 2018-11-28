@@ -1,0 +1,17 @@
+[Unit]
+Description=AWS Server Test (on top of working SCREF)
+
+[Service]
+ExecStart=/home/bcuser/npm/bin/npm run start-service
+WorkingDirectory=/home/bcuser/bin/awsServerTest
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=awsServerTest
+User=bcuser
+Group=bcuser
+Environment=NODE_ENV=production
+Environment=SERVER_PORT=30033
+
+[Install]
+WantedBy=multi-user.target

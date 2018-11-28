@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo systemctl enable awsServerTest.service
+sudo systemctl start awsServerTest.service

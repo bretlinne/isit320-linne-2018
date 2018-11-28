@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo systemctl stop awsServerTest.service
+sudo systemctl disable awsServerTest.service
