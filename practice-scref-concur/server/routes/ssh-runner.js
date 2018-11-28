@@ -7,8 +7,12 @@ const elfUtils = require('elven-code').elfUtils;
 const hostAddress = '18.206.62.166';
 
 let allData = '';
-
+//***************************
+//UNCOMMENT BY THE NUMBERS
+//***************************
 const getSshIp = () => {
+    console.log('inside getSshIp');
+
     return new Promise(function (resolve, reject) {
         elfUtils.readFile(process.env.HOME + '/.ssh/config')
             .then((content) => {
@@ -27,9 +31,12 @@ const getSshIp = () => {
                         result.identityFile = path.substring(path.lastIndexOf('/') + 1, path.length)
                     }
                 }
+                console.log('hostName: ', result.hostName.toString());
+                console.log('idFile: ', result.identityFile.toString());
                 resolve(result);
             })
             .catch(reject);
+
     });
 };
 
@@ -80,7 +87,8 @@ const runCpuInfoRemote = (hostAddress, response) => {
     });
 };
 
-const runUptimeRemote = (hostName, identityFile, response) => {
+//const runUptimeRemote = (hostName, identityFile, response) => {               1)
+const runUptimeRemote = (hostAddress, response) => {
     // create new inst. of client and get conn obj back
     var conn = new Client();
 
@@ -114,30 +122,43 @@ const runUptimeRemote = (hostName, identityFile, response) => {
         //this is for when we actually conn to the server
         //this also appears to run before the code above
     }).connect({
-        host: hostName,
+        //host: hostName,                                                       2)
+        host: hostAddress, //hostName,
         port: 22,
         username: 'ubuntu',
         privateKey: require('fs').readFileSync(
-            process.env.HOME + identityFile
+            //process.env.HOME + identityFile
+            process.env.HOME + LinnePrivateKey //identityFile                   3)
         )
     });
 };
 
+//4) comment out this block;                                                    4)
+
 router.get('/uptime', (request, response) => {
     allData = '';
     console.log('run-uptime-remote called in ssh-runner', hostAddress);
+    // this needs 'response' because it has a 'send' method
+    // that allows sending data back to the client
+    runUptimeRemote(hostAddress, response);
+});
+
+/*                                                                              5)
+CHARLIE"S FAILED GETSSHIP()
+**************************8
+router.get('/uptime', function(request, response) {
+    console.log('run-get-started called in ssh-runner', hostAddress);
     getSshIp()
         .then((result) => {
             runUptimeRemote(result.hostName, result.identityFile, response);
         })
         .catch((err) => {
+            console.log('after getSshIp, in router.get--FAILURE');
             response.send(err);
-        })
-    // this needs 'response' because it has a 'send' method
-    // that allows sending data back to the client
-    //runUptimeRemote(hostAddress, response);
-});
+        });
 
+});
+*/
 router.get('/cpu-info', (request, response) => {
     allData = '';
     console.log('run-cpu-info called in ssh-runner', hostAddress);
