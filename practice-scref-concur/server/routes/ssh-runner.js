@@ -2,21 +2,36 @@ var express = require('express');
 var router = express.Router();
 const Client = require('ssh2').Client;
 const LinnePrivateKey = '/.ssh/isit320-AWS-educate.pem';
-//const elfUtils = require('elven-code').elfUtils;
+const elfUtils = require('elven-code').elfUtils;
 
 const hostAddress = '18.206.62.166';
 
 let allData = '';
 
-/*const getSshIp = () => {
-    return new Promise(function(resolve, reject){
-        elfUtils
-            .readFile(process.end.HOME + '/.ssh/config')
-            ...
-    })
-}
-
-*/
+const getSshIp = () => {
+    return new Promise(function (resolve, reject) {
+        elfUtils.readFile(process.env.HOME + '/.ssh/config')
+            .then((content) => {
+                //var pattern = new RegExp('Host ec2-bc[\\s\\S]\\s*(.*)[\\s\\S]\\s*(.*)[\\s\\S]\\s*(.*)[\\s\\S]\\s*(.*)');
+                var pattern = new RegExp('Host ec2-bc\n\t(.*)\n\t(.*)\n\t(.*)\n\t(.*)');
+                const result = {};
+                const match = content.result.match(pattern);
+                for (let i = 1; i < 5; i++) {
+                    if (match[i].startsWith('HostName')) {
+                        var hostPattern = new RegExp('HostName\\s(.*)');
+                        result.hostName = match[i].match(hostPattern)[1];
+                    }
+                    if (match[i].startsWith('IdentityFile')) {
+                        const idPattern = new RegExp('IdentityFile\\s(.*)');
+                        const path = match[i].match(idPattern)[1];
+                        result.identityFile = path.substring(path.lastIndexOf('/') + 1, path.length)
+                    }
+                }
+                resolve(result);
+            })
+            .catch(reject);
+    });
+};
 
 // ---------------------
 // run CPU Info Remote
@@ -65,7 +80,7 @@ const runCpuInfoRemote = (hostAddress, response) => {
     });
 };
 
-const runUptimeRemote = (hostAddress, response) => {
+const runUptimeRemote = (hostName, identityFile, response) => {
     // create new inst. of client and get conn obj back
     var conn = new Client();
 
@@ -99,11 +114,11 @@ const runUptimeRemote = (hostAddress, response) => {
         //this is for when we actually conn to the server
         //this also appears to run before the code above
     }).connect({
-        host: hostAddress,
+        host: hostName,
         port: 22,
         username: 'ubuntu',
         privateKey: require('fs').readFileSync(
-            process.env.HOME + LinnePrivateKey
+            process.env.HOME + identityFile
         )
     });
 };
@@ -111,9 +126,16 @@ const runUptimeRemote = (hostAddress, response) => {
 router.get('/uptime', (request, response) => {
     allData = '';
     console.log('run-uptime-remote called in ssh-runner', hostAddress);
+    getSshIp()
+        .then((result) => {
+            runUptimeRemote(result.hostName, result.identityFile, response);
+        })
+        .catch((err) => {
+            response.send(err);
+        })
     // this needs 'response' because it has a 'send' method
     // that allows sending data back to the client
-    runUptimeRemote(hostAddress, response);
+    //runUptimeRemote(hostAddress, response);
 });
 
 router.get('/cpu-info', (request, response) => {
