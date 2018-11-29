@@ -5,8 +5,8 @@
     "scripts": {
         "start": "nodemon ./bin/www",
         "start-service": "node ./bin/www",
-        "test": "mocha 'test/index-test.js'",
-        "test": "mocha 'test/*test.js'"
+        "test": "mocha 'test/apiTest.js'",
+        "test": "mocha 'test/*Test.js'"
     },
     "dependencies": {
         "cookie-parser": "~1.4.3",

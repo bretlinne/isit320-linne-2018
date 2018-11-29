@@ -12,7 +12,7 @@ describe('Test index.js', function() {
             .expect(200, done);
     });
 
-    it('should check foo route', function(done) {
+    it('should check foo route and check JSON', function(done) {
         request(app)
             .get('/foo')
             .set('Accept', 'application/json')
