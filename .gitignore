@@ -55,6 +55,9 @@ build/
 node_modules/
 jspm_packages/
 
+#No Hangup Signal
+nohup.out
+
 # TypeScript v1 declaration files
 typings/
 
