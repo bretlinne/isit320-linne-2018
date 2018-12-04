@@ -11,8 +11,10 @@ class RadioLocal extends Component {
             '/index/run-foo',   //0
             '/index/run-bar',   //1
             '/index/run-qux',   //2
-            '/script-pusher/run-script?script=', // dataEndpoint #3
-            '/script-pusher/run-system-tool?script=' // dataEndpoint #4
+            '/index/run-farq',  //3
+            '/index/run-snafu', //4
+            '/script-pusher/run-script?script=', // dataEndpoint #5
+            '/script-pusher/run-system-tool?script=' // dataEndpoint #6
         ];
         this.state = {
             allData: '',
@@ -20,7 +22,9 @@ class RadioLocal extends Component {
             endPointIndex: 0,
             foo: 'unknown',
             bar: 'unknown',
-            qux: 'unknown'
+            qux: 'unknown',
+            farq: 'unknown',
+            snafu: 'unknown'
         };
     }
 
@@ -61,6 +65,35 @@ class RadioLocal extends Component {
             .then(function(json) {
                 console.log('runQux Function: ', json.result);
                 that.setState({ qux: json.result });
+                return json;
+            });
+    };
+
+    runFarq = () => {
+        const that = this;
+        fetch('/run-farq')
+            .then(function(response) {
+                console.log('farq result: ', response);
+                return response.json();
+            })
+            .then(function(json) {
+                console.log('runFarq Function: ', json.result);
+                that.setState({ farq: json.result });
+                return json;
+            });
+    };
+
+
+    runSnafu = () => {
+        const that = this;
+        fetch('/run-snafu')
+            .then(function(response) {
+                console.log('snafu result: ', response);
+                return response.json();
+            })
+            .then(function(json) {
+                console.log('runSnafu Function: ', json.result);
+                that.setState({ snafu: json.result });
                 return json;
             });
     };
@@ -129,6 +162,12 @@ class RadioLocal extends Component {
             case 'Qux':
                 this.runQux();
                 break;
+            case 'Farq':
+                this.runFarq();
+                break;
+            case 'Snafu':
+                this.runSnafu();
+                break;
             default:
                 this.runScript(
                     this.dataEndPoints[this.state.endPointIndex],
@@ -189,7 +228,27 @@ class RadioLocal extends Component {
                             <input
                                 type="radio"
                                 name="app-choice"
+                                data-endpoint="3"
+                                value="Farq"
+                                id="elf-radio-farq"
+                                onChange={this.handleChange}
+                            />
+                            <label htmlFor="elf-radio-farq">Run Farq</label>
+
+                            <input
+                                type="radio"
+                                name="app-choice"
                                 data-endpoint="4"
+                                value="Snafu"
+                                id="elf-radio-snafu"
+                                onChange={this.handleChange}
+                            />
+                            <label htmlFor="elf-radio-snafu">Run Snafu</label>
+
+                            <input
+                                type="radio"
+                                name="app-choice"
+                                data-endpoint="6"
                                 value="Uptime"
                                 id="elf-radio-uptime"
                                 onChange={this.handleChange}
@@ -215,6 +274,8 @@ class RadioLocal extends Component {
                         <pre>{this.state.foo}</pre>
                         <pre>{this.state.bar}</pre>
                         <pre>{this.state.qux}</pre>
+                        <pre>{this.state.farq}</pre>
+                        <pre>{this.state.snafu}</pre>
                     </section>
                     <section>
                         <pre>{this.state.allData}</pre>

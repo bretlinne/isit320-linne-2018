@@ -25,6 +25,15 @@ router.get('/run-qux', (request, response) => {
     response.send({ result: 'qux route called' });
 });
 
+router.get('/run-farq', (request, response) => {
+    'use strict';
+    response.send({ result: 'farq route called' });
+});
+
+router.get('/run-snafu', (request, response) => {
+    'use strict';
+    response.send({ result: 'snafu route called' });
+});
 
 
 module.exports = router;
