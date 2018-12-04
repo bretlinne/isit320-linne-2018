@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo systemctl enable linne-final.service
+sudo systemctl start linne-final.service
