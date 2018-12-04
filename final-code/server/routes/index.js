@@ -10,4 +10,21 @@ router.get('/', function(req, res) {
     });
 });
 
+router.get('/run-foo', (request, response) => {
+    'use strict';
+    response.send({ result: 'foo route called' });
+});
+
+router.get('/run-bar', (request, response) => {
+    'use strict';
+    response.send({ result: 'bar route called' });
+});
+
+router.get('/run-qux', (request, response) => {
+    'use strict';
+    response.send({ result: 'qux route called' });
+});
+
+
+
 module.exports = router;

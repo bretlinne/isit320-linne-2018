@@ -8,15 +8,62 @@ class RadioLocal extends Component {
     constructor(props) {
         super(props);
         this.dataEndPoints = [
-            '/script-pusher/run-script?script=', // dataEndpoint #0
-            '/script-pusher/run-system-tool?script=' // dataEndpoint #1
+            '/index/run-foo',   //0
+            '/index/run-bar',   //1
+            '/index/run-qux',   //2
+            '/script-pusher/run-script?script=', // dataEndpoint #3
+            '/script-pusher/run-system-tool?script=' // dataEndpoint #4
         ];
         this.state = {
             allData: '',
             selectedValue: '',
-            endPointIndex: 0
+            endPointIndex: 0,
+            foo: 'unknown',
+            bar: 'unknown',
+            qux: 'unknown'
         };
     }
+
+    runFoo = () => {
+        const that = this;
+        fetch('/run-foo')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(json) {
+                console.log('runFoo Function: ', json.result);
+                that.setState({ foo: json.result });
+                return json;
+            });
+    };
+
+    runBar = () => {
+        const that = this;
+        fetch('/run-bar')
+            .then(function(response) {
+                console.log('bar result: ', response);
+                return response.json();
+            })
+            .then(function(json) {
+                console.log('runFoo Function: ', json.result);
+                that.setState({ bar: json.result });
+                return json;
+            });
+    };
+
+    runQux = () => {
+        const that = this;
+        fetch('/run-qux')
+            .then(function(response) {
+                console.log('qux result: ', response);
+                return response.json();
+            })
+            .then(function(json) {
+                console.log('runQux Function: ', json.result);
+                that.setState({ qux: json.result });
+                return json;
+            });
+    };
 
     runScript = (path, script) => {
         const that = this;
@@ -72,10 +119,31 @@ class RadioLocal extends Component {
         console.log('A name was submitted: ', this.state);
         console.log('path: ', this.dataEndPoints[this.state.endPointIndex]);
         console.log('script: ', this.state.selectedValue);
-        this.runScript(
-            this.dataEndPoints[this.state.endPointIndex],
-            this.state.selectedValue
-        );
+        switch(this.state.selectedValue){
+            case 'Foo':
+                this.runFoo();
+                break;
+            case 'Bar':
+                this.runBar();
+                break;
+            case 'Qux':
+                this.runQux();
+                break;
+            default:
+                this.runScript(
+                    this.dataEndPoints[this.state.endPointIndex],
+                    this.state.selectedValue
+                );
+                break;
+        }
+        /*
+      // UNCOMMENT AFTER STUBBING ALL FUNCTIONS, ELMINATE SWITCH CASE ABOVE
+      this.runScript(
+          this.dataEndPoints[this.state.endPointIndex],
+          this.state.selectedValue
+      );
+      */
+
         event.preventDefault();
     };
 
@@ -90,27 +158,38 @@ class RadioLocal extends Component {
                                 type="radio"
                                 name="app-choice"
                                 data-endpoint="0"
-                                value="CpuInfo"
-                                id="elf-radio-cpu"
+                                value="Foo"
+                                id="elf-radio-foo"
                                 onChange={this.handleChange}
                             />
-                            <label htmlFor="elf-radio-cpu">CpuInfo</label>
+                            <label htmlFor="elf-radio-foo">Run Foo</label>
 
                             <input
                                 type="radio"
                                 name="app-choice"
-                                data-endpoint="0"
-                                value="VersionCheck"
-                                id="elf-radio-version"
+                                data-endpoint="1"
+                                value="Bar"
+                                id="elf-radio-bar"
                                 onChange={this.handleChange}
                             />
-                            <label htmlFor="elf-radio-version">
-                                Version Info
+                            <label htmlFor="elf-radio-bar">
+                                Run Bar
                             </label>
+
                             <input
                                 type="radio"
                                 name="app-choice"
-                                data-endpoint="1"
+                                data-endpoint="2"
+                                value="Qux"
+                                id="elf-radio-qux"
+                                onChange={this.handleChange}
+                            />
+                            <label htmlFor="elf-radio-qux">Run Qux</label>
+
+                            <input
+                                type="radio"
+                                name="app-choice"
+                                data-endpoint="4"
                                 value="Uptime"
                                 id="elf-radio-uptime"
                                 onChange={this.handleChange}
@@ -131,7 +210,12 @@ class RadioLocal extends Component {
         return (
             <div className="App">
                 <main>
-                    <section>{radioLocal}</section>
+                    <section>
+                        {radioLocal}
+                        <pre>{this.state.foo}</pre>
+                        <pre>{this.state.bar}</pre>
+                        <pre>{this.state.qux}</pre>
+                    </section>
                     <section>
                         <pre>{this.state.allData}</pre>
                     </section>
