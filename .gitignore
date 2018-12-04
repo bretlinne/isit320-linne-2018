@@ -13,7 +13,10 @@ platforms
 Thumbs.db
 *.zip
 npm-debug.log# IDE Files
+<<<<<<< HEAD
 
+=======
+>>>>>>> midterm
 
 # Package files
 node_modules
@@ -52,10 +55,14 @@ bower_components
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
+build/
 
 # Dependency directories
 node_modules/
 jspm_packages/
+
+#No Hangup Signal
+nohup.out
 
 # TypeScript v1 declaration files
 typings/
