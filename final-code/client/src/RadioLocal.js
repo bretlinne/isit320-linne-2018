@@ -13,8 +13,9 @@ class RadioLocal extends Component {
             '/index/run-qux',   //2
             '/index/run-farq',  //3
             '/index/run-snafu', //4
-            '/script-pusher/run-script?script=', // dataEndpoint #5
-            '/script-pusher/run-system-tool?script=' // dataEndpoint #6
+            '/script-pusher/copy-get-started?script=',  //5
+            '/script-pusher/run-script?script=', // dataEndpoint #6
+            '/script-pusher/run-system-tool?script=' // dataEndpoint #7
         ];
         this.state = {
             allData: '',
@@ -248,7 +249,17 @@ class RadioLocal extends Component {
                             <input
                                 type="radio"
                                 name="app-choice"
-                                data-endpoint="6"
+                                data-endpoint="5"
+                                value="CopyGetStarted"
+                                id="elf-radio-CGS"
+                                onChange={this.handleChange}
+                            />
+                            <label htmlFor="elf-radio-CGS">CopygetStarted (DUMMY-TIME)</label>
+
+                            <input
+                                type="radio"
+                                name="app-choice"
+                                data-endpoint="7"
                                 value="Uptime"
                                 id="elf-radio-uptime"
                                 onChange={this.handleChange}
