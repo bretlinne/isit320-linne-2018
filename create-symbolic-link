@@ -1,0 +1,5 @@
+#! /bin bash
+
+# this is s reminder of how to make a symbolic link.  This makes 
+# a link in ~/bin that points to a file in the linneScripts/ dir.
+ln -s ~/Git/isit320-linne-2018/linneScripts/try-run-both ~/bin/.
