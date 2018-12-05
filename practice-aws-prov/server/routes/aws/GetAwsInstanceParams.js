@@ -2,11 +2,11 @@ var AWS = require('aws-sdk');
 
 const awsParams = {};
 
-const getInstanceParams = (awsParams) => {
+const getInstanceParams = awsParams => {
     return {
         BlockDeviceMappings: [
             {
-                DeviceName: "/dev/sda1",
+                DeviceName: '/dev/sda1',
                 Ebs: {
                     VolumeSize: 16,
                     VolumeType: 'gp2'
@@ -23,11 +23,14 @@ const getInstanceParams = (awsParams) => {
 };
 
 function showAwsEducateCredentials() {
-    AWS.config.credentials.get(function () {
+    AWS.config.credentials.get(function() {
         var accessKeyId = AWS.config.credentials.accessKeyId;
         var secretAccessKey = AWS.config.credentials.secretAccessKey;
-        console.log("Access Key:", AWS.config.credentials.accessKeyId);
-        console.log("Secret Access Key:", AWS.config.credentials.secretAccessKey);
+        console.log('Access Key:', AWS.config.credentials.accessKeyId);
+        console.log(
+            'Secret Access Key:',
+            AWS.config.credentials.secretAccessKey
+        );
     });
 }
 // a.k.a CharlieConfiguration.  Is same thing
@@ -38,7 +41,7 @@ function showAwsStandardConfiguration() {
 
 module.exports.awsEducate = () => {
     showAwsEducateCredentials();
-    AWS.config.update({region:'us-east-1'});
+    AWS.config.update({ region: 'us-east-1' });
     awsParams.ImageId = 'ami-0ac019f4fcb7cb7e6';
     awsParams.KeyName = 'ec2';
     awsParams.SecurityGroupIds = ['isit320'];
@@ -52,10 +55,3 @@ module.exports.awsStandard = () => {
     awsParams.SecurityGroupIds = ['isit320'];
     return getInstanceParams(awsParams);
 };
-
-
-
-
-
-
-

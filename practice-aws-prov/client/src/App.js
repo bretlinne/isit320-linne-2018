@@ -86,7 +86,9 @@ class App extends Component {
     //---------------------
     associateElasticIp = () => {
         const that = this;
-        fetch('/associate-elastic-ip?instanceId=xxx&allocationId=yyy&region=zzz')
+        fetch(
+            '/associate-elastic-ip?instanceId=xxx&allocationId=yyy&region=zzz'
+        )
             .then(function(response) {
                 return response.json();
             })
@@ -150,7 +152,6 @@ class App extends Component {
                 );
             });
     };
-
 
     //---------------------
     // runLubuntuSetup
@@ -255,9 +256,7 @@ class App extends Component {
                 <main>
                     <section>
                         <button onClick={this.queryServer}>Bar</button>
-                        <pre>
-                            state: {this.state.status}
-                        </pre>
+                        <pre>state: {this.state.status}</pre>
                     </section>
 
                     <hr />

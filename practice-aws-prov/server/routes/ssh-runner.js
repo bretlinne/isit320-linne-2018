@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const Client = require('ssh2').Client;
-const LinnePrivateKey = '/.ssh/isit320-AWS-educate.pem';
+//const LinnePrivateKey = '/.ssh/isit320-AWS-educate.pem';
 const elfUtils = require('elven-code').elfUtils;
 
-const hostAddress = '18.206.62.166';
+//const hostAddress = '18.206.62.166';
 
 let allData = '';
 //***************************
@@ -16,7 +16,9 @@ const getSshIp = () => {
             .readFile(process.env.HOME + '/.ssh/config')
             .then(content => {
                 //var pattern = new RegExp('Host ec2-bc[\\s\\S]\\s*(.*)[\\s\\S]\\s*(.*)[\\s\\S]\\s*(.*)[\\s\\S]\\s*(.*)');
-                var pattern = new RegExp('Host ec2-bc\n\t(.*)\n\t(.*)\n\t(.*)\n\t(.*)');
+                var pattern = new RegExp(
+                    'Host ec2-bc\n\t(.*)\n\t(.*)\n\t(.*)\n\t(.*)'
+                );
                 const result = {};
                 const match = content.result.match(pattern);
                 //console.log('BEFORE FOR LOOP');
@@ -132,7 +134,7 @@ const runUptimeRemote = (hostName, identityFile, response) => {
         )
     });
 };
-
+/*
 const runGetStarted = (hostAddress, response) => {
     // create new inst. of client and get conn obj back
     var conn = new Client();
@@ -149,9 +151,9 @@ const runGetStarted = (hostAddress, response) => {
                 .on('close', function(code, signal) {
                     console.log(
                         'Stream :: close :: code: ' +
-                        code +
-                        ', signal: ' +
-                        signal
+                            code +
+                            ', signal: ' +
+                            signal
                     );
                     conn.end();
                     response.send({ result: 'success', allData: allData });
@@ -161,9 +163,9 @@ const runGetStarted = (hostAddress, response) => {
                     allData += data;
                 })
                 .stderr.on('data', function(data) {
-                console.log('STDERR: ' + data);
-                allData += data;
-            });
+                    console.log('STDERR: ' + data);
+                    allData += data;
+                });
         });
         //this is for when we actually conn to the server
         //this also appears to run before the code above
@@ -177,8 +179,7 @@ const runGetStarted = (hostAddress, response) => {
         )
     });
 };
-
-
+*/
 router.get('/uptime', function(request, response) {
     allData = '';
     getSshIp()
@@ -207,19 +208,21 @@ router.get('/cpu-info', (request, response) => {
     //runCpuInfoRemote(hostAddress, response);
 });
 
-
 router.get('/run-get-started', (request, response) => {
     allData = '';
 
     getSshIp()
         .then(result => {
             var message = {
-                'result': 'SUCCESS',
-                'route': request.route.path,
-                'hostName': result.hostName,
-                'idFile': result.identityFile
+                result: 'SUCCESS',
+                route: request.route.path,
+                hostName: result.hostName,
+                idFile: result.identityFile
             };
-            console.log('run-get-started  calledin SSH-RUNNER:\n' + JSON.stringify(message, null, 4));
+            console.log(
+                'run-get-started  calledin SSH-RUNNER:\n' +
+                    JSON.stringify(message, null, 4)
+            );
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
@@ -228,7 +231,7 @@ router.get('/run-get-started', (request, response) => {
         });
 
     //runGetStarted(hostAddress, response);
-    response.send({result: 'RUN GET STARTED ROUTER success'});
+    response.send({ result: 'RUN GET STARTED ROUTER success' });
 });
 
 router.get('/run-lubuntu-setup', (request, response) => {
@@ -237,12 +240,15 @@ router.get('/run-lubuntu-setup', (request, response) => {
     getSshIp()
         .then(result => {
             var message = {
-                'result': 'SUCCESS',
-                'route': request.route.path,
-                'hostName': result.hostName,
-                'idFile': result.identityFile
+                result: 'SUCCESS',
+                route: request.route.path,
+                hostName: result.hostName,
+                idFile: result.identityFile
             };
-            console.log('run-lubuntu-setup calledin SSH-RUNNER:\n' + JSON.stringify(message, null, 4));
+            console.log(
+                'run-lubuntu-setup calledin SSH-RUNNER:\n' +
+                    JSON.stringify(message, null, 4)
+            );
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
@@ -252,9 +258,7 @@ router.get('/run-lubuntu-setup', (request, response) => {
 
     //runLububtuSetup(hostAddress, response);
     //response.send(message);
-    response.send({result: 'RUN LUBUNTU SETUP ROUTER success'});
-
-
+    response.send({ result: 'RUN LUBUNTU SETUP ROUTER success' });
 });
 
 module.exports = router;

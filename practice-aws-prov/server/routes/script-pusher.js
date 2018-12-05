@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-const spawn = require('child_process').spawn;
-const uptimePath = '/usr/bin/uptime';
-const DUMMY_SYSTEM_FUNCTION_PATH = '/usr/bin/time';
+//const spawn = require('child_process').spawn;
+//const uptimePath = '/usr/bin/uptime';
+//const DUMMY_SYSTEM_FUNCTION_PATH = '/usr/bin/time';
 const elfUtils = require('elven-code').elfUtils;
-let allData = '';
+//let allData = '';
 
 const getSshIp = () => {
     return new Promise(function(resolve, reject) {
@@ -12,7 +12,9 @@ const getSshIp = () => {
             .readFile(process.env.HOME + '/.ssh/config')
             .then(content => {
                 //var pattern = new RegExp('Host ec2-bc[\\s\\S]\\s*(.*)[\\s\\S]\\s*(.*)[\\s\\S]\\s*(.*)[\\s\\S]\\s*(.*)');
-                var pattern = new RegExp('Host ec2-bc\n\t(.*)\n\t(.*)\n\t(.*)\n\t(.*)');
+                var pattern = new RegExp(
+                    'Host ec2-bc\n\t(.*)\n\t(.*)\n\t(.*)\n\t(.*)'
+                );
                 const result = {};
                 const match = content.result.match(pattern);
                 //console.log('BEFORE FOR LOOP');
@@ -112,10 +114,13 @@ const runScript = script => {
 // this is stubbed out based on the Run-system-tool function above.
 // likely it should be based on the runScript function, since i think the
 // copyGetStarted is a Charlie Script.  Lets just get it stubbed out for now.
+/*
 const copyGetStarted = () => {
     return new Promise(function(resolve, reject) {
-        console.log('Run DUMMY_TIME on LocalSystem', DUMMY_SYSTEM_FUNCTION_PATH);
-        /**/
+        console.log(
+            'Run DUMMY_TIME on LocalSystem',
+            DUMMY_SYSTEM_FUNCTION_PATH
+        );
         const invokeCommand = spawn(DUMMY_SYSTEM_FUNCTION_PATH);
         invokeCommand.stdout.on('data', data => {
             console.log(`child stdout:\n${data}`);
@@ -144,11 +149,14 @@ const copyGetStarted = () => {
         });
     });
 };
-
-const removeKnownHost= () => {
+*/
+/*
+const removeKnownHost = () => {
     return new Promise(function(resolve, reject) {
-        console.log('Run DUMMY_TIME on LocalSystem', DUMMY_SYSTEM_FUNCTION_PATH);
-        /**/
+        console.log(
+            'Run DUMMY_TIME on LocalSystem',
+            DUMMY_SYSTEM_FUNCTION_PATH
+        );
         const invokeCommand = spawn(DUMMY_SYSTEM_FUNCTION_PATH);
         invokeCommand.stdout.on('data', data => {
             console.log(`child stdout:\n${data}`);
@@ -177,19 +185,22 @@ const removeKnownHost= () => {
         });
     });
 };
-
+*/
 router.get('/copy-get-started', function(request, response) {
     'use strict';
     console.log('QUERY: DUMMY-COPYGETSTARTED ROUTER');
-    allData = '';
     getSshIp()
         .then(result => {
             var message = {
-                'result': 'SUCCESS',
-                'route': request.route.path,
-                'hostName': result.hostName,
-                'idFile': result.identityFile };
-            console.log('Copy-get-started calledin SCRIPT-PUSHER:\n' + JSON.stringify(message, null, 4));
+                result: 'SUCCESS',
+                route: request.route.path,
+                hostName: result.hostName,
+                idFile: result.identityFile
+            };
+            console.log(
+                'Copy-get-started calledin SCRIPT-PUSHER:\n' +
+                    JSON.stringify(message, null, 4)
+            );
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
@@ -208,22 +219,24 @@ router.get('/copy-get-started', function(request, response) {
             response.send(err);
         });
         */
-    response.send({result: 'COPY GET STARTED ROUTER success'});
+    response.send({ result: 'COPY GET STARTED ROUTER success' });
 });
 
 router.get('/remove-known-host', function(request, response) {
     'use strict';
     console.log('QUERY: DUMMY-REMOVEKNOWNHOST ROUTER');
-    allData = '';
     getSshIp()
         .then(result => {
             var message = {
-                'result': 'SUCCESS',
-                'route': request.route.path,
-                'hostName': result.hostName,
-                'idFile': result.identityFile
+                result: 'SUCCESS',
+                route: request.route.path,
+                hostName: result.hostName,
+                idFile: result.identityFile
             };
-            console.log('reboot-instance called in SCRIPT-PUSHER:\n' + JSON.stringify(message, null, 4));
+            console.log(
+                'reboot-instance called in SCRIPT-PUSHER:\n' +
+                    JSON.stringify(message, null, 4)
+            );
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
@@ -241,8 +254,10 @@ router.get('/remove-known-host', function(request, response) {
             response.send(err);
         });
         */
-    response.send({result: 'REMOVE KNOWN HOST ROUTER success', query: request.query});
+    response.send({
+        result: 'REMOVE KNOWN HOST ROUTER success',
+        query: request.query
+    });
 });
-
 
 module.exports = router;

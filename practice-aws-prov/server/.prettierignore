@@ -1,0 +1,4 @@
+**/build/**
+**/serviceWorker.js
+**/routes/utilScripts/**
+**/routes/aws/**
