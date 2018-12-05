@@ -7,7 +7,7 @@ class LinneHeader extends Component {
         return (
             <div className="App">
                 <header>
-                    <h1>Linne Final Project</h1>
+                    <h1>Linne AWS Provision Final</h1>
                 </header>
             </div>
         );
