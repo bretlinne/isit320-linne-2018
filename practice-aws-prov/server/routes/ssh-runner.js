@@ -210,19 +210,41 @@ router.get('/cpu-info', (request, response) => {
 
 router.get('/run-get-started', (request, response) => {
     allData = '';
-    /*
+
     getSshIp()
         .then(result => {
-            console.log('run-cpu-info called in ssh-runner', result.hostName);
-            runCpuInfoRemote(result.hostName, result.identityFile, response);
+            var message = {'result': 'run-get-started  SUCCESS', 'hostName': result.hostName, 'idFile': result.identityFile };
+            console.log('run-get-started  calledin SSH-RUNNER:\n' + JSON.stringify(message, null, 4));
+            //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
             console.log(err);
             response.send(err);
         });
-*/
+
     //runGetStarted(hostAddress, response);
     response.send({result: 'RUN GET STARTED ROUTER success'});
+});
+
+router.get('/run-lubuntu-setup', (request, response) => {
+    allData = '';
+
+    getSshIp()
+        .then(result => {
+            var message = {'result': 'run-lubuntu-setup SUCCESS', 'hostName': result.hostName, 'idFile': result.identityFile };
+            console.log('run-lubuntu-setup calledin SSH-RUNNER:\n' + JSON.stringify(message, null, 4));
+            //runCpuInfoRemote(result.hostName, result.identityFile, response);
+        })
+        .catch(err => {
+            console.log(err);
+            response.send(err);
+        });
+
+    //runLububtuSetup(hostAddress, response);
+    //response.send(message);
+    response.send({result: 'RUN LUBUNTU SETUP ROUTER success'});
+
+
 });
 
 module.exports = router;

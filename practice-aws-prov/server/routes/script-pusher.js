@@ -1,10 +1,43 @@
 var express = require('express');
 var router = express.Router();
-
 const spawn = require('child_process').spawn;
 const uptimePath = '/usr/bin/uptime';
 const DUMMY_SYSTEM_FUNCTION_PATH = '/usr/bin/time';
+const elfUtils = require('elven-code').elfUtils;
 let allData = '';
+
+const getSshIp = () => {
+    return new Promise(function(resolve, reject) {
+        elfUtils
+            .readFile(process.env.HOME + '/.ssh/config')
+            .then(content => {
+                //var pattern = new RegExp('Host ec2-bc[\\s\\S]\\s*(.*)[\\s\\S]\\s*(.*)[\\s\\S]\\s*(.*)[\\s\\S]\\s*(.*)');
+                var pattern = new RegExp('Host ec2-bc\n\t(.*)\n\t(.*)\n\t(.*)\n\t(.*)');
+                const result = {};
+                const match = content.result.match(pattern);
+                //console.log('BEFORE FOR LOOP');
+
+                for (let i = 1; i < 5; i++) {
+                    if (match[i].startsWith('HostName')) {
+                        var hostPattern = new RegExp('HostName\\s(.*)');
+                        result.hostName = match[i].match(hostPattern)[1];
+                    }
+                    if (match[i].startsWith('IdentityFile')) {
+                        const idPattern = new RegExp('IdentityFile\\s(.*)');
+                        const path = match[i].match(idPattern)[1];
+                        result.identityFile = path.substring(
+                            path.lastIndexOf('/') + 1,
+                            path.length
+                        );
+                    }
+                }
+                //console.log('AFTER FOR LOOP', result);
+
+                resolve(result);
+            })
+            .catch(reject);
+    });
+};
 
 /*
 const runSystemTool = () => {
@@ -149,6 +182,17 @@ router.get('/copy-get-started', function(request, response) {
     'use strict';
     console.log('QUERY: DUMMY-COPYGETSTARTED ROUTER');
     allData = '';
+    getSshIp()
+        .then(result => {
+            var message = {'result': 'Copy-get-started SUCCESS', 'hostName': result.hostName, 'idFile': result.identityFile };
+            console.log('Copy-get-started calledin SCRIPT-PUSHER:\n' + JSON.stringify(message, null, 4));
+            //runCpuInfoRemote(result.hostName, result.identityFile, response);
+        })
+        .catch(err => {
+            console.log(err);
+            response.send(err);
+        });
+
     /*
     copyGetStarted()
         .then(result => {
@@ -167,6 +211,17 @@ router.get('/remove-known-host', function(request, response) {
     'use strict';
     console.log('QUERY: DUMMY-REMOVEKNOWNHOST ROUTER');
     allData = '';
+    getSshIp()
+        .then(result => {
+            var message = {'result': 'remove-known-host SUCCESS', 'hostName': result.hostName, 'idFile': result.identityFile };
+            console.log('reboot-instance called in SCRIPT-PUSHER:\n' + JSON.stringify(message, null, 4));
+            //runCpuInfoRemote(result.hostName, result.identityFile, response);
+        })
+        .catch(err => {
+            console.log(err);
+            response.send(err);
+        });
+
     /*removeKnownHost()
         .then(result => {
             console.log(JSON.stringify(result, null, 4));

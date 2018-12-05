@@ -1,16 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import 'whatwg-fetch';
-import LinneHeader from "./LinneHeader";
+import LinneHeader from './LinneHeader';
 
 class App extends Component {
     constructor() {
         super();
         this.state = {
-            file: 'File name will be placed here.',
             status: 'waiting for server',
-            responseTop: 'unknown',
-            responseBottom: 'unknown'
+            responseTop: 'unknown'
         };
     }
 
@@ -24,11 +22,15 @@ class App extends Component {
                 return response.json();
             })
             .then(function(json) {
-                console.log('parsed json', json);
-                that.setState(foo => (json));
+                console.log('runFoo called: ', json.result);
+                that.setState({ status: 'Foo Route Called ' + json.result });
+                return json;
             })
             .catch(function(ex) {
-                console.log('parsing failed, URL bad, network down, or similar', ex);
+                console.log(
+                    'parsing failed, URL bad, network down, or similar',
+                    ex
+                );
             });
     };
 
@@ -48,10 +50,12 @@ class App extends Component {
                 return json;
             })
             .catch(function(ex) {
-                console.log('parsing failed, URL bad, network down, or similar', ex);
+                console.log(
+                    'parsing failed, URL bad, network down, or similar',
+                    ex
+                );
             });
     };
-
 
     //---------------------
     // /create-standard
@@ -63,12 +67,18 @@ class App extends Component {
                 return response.json();
             })
             .then(function(json) {
-                console.log('createWithAwsStandardAccount Function called: ', json.result);
+                console.log(
+                    'createWithAwsStandardAccount Function called: ',
+                    json.result
+                );
                 that.setState({ responseTop: json.result });
                 return json;
             })
             .catch(function(ex) {
-                console.log('parsing failed, URL bad, network down, or similar', ex);
+                console.log(
+                    'parsing failed, URL bad, network down, or similar',
+                    ex
+                );
             });
     };
     //---------------------
@@ -81,12 +91,18 @@ class App extends Component {
                 return response.json();
             })
             .then(function(json) {
-                console.log('associateElasticIp Function called: ', json.result);
+                console.log(
+                    'associateElasticIp Function called: ',
+                    json.result
+                );
                 that.setState({ responseTop: json.result });
                 return json;
             })
             .catch(function(ex) {
-                console.log('parsing failed, URL bad, network down, or similar', ex);
+                console.log(
+                    'parsing failed, URL bad, network down, or similar',
+                    ex
+                );
             });
     };
 
@@ -101,11 +117,14 @@ class App extends Component {
             })
             .then(function(json) {
                 console.log('copyGetStarted Function called: ', json.result);
-                that.setState({ responseBottom: json.result });
+                that.setState({ responseTop: json.result });
                 return json;
             })
             .catch(function(ex) {
-                console.log('parsing failed, URL bad, network down, or similar', ex);
+                console.log(
+                    'parsing failed, URL bad, network down, or similar',
+                    ex
+                );
             });
     };
 
@@ -120,13 +139,40 @@ class App extends Component {
             })
             .then(function(json) {
                 console.log('runGetStarted Function called: ', json.result);
-                that.setState({ responseBottom : json.result });
+                that.setState({ responseTop: json.result });
                 return json;
             })
             .catch(function(ex) {
-                console.log('parsing failed, URL bad, network down, or similar', ex);
+                console.log(
+                    'parsing failed, URL bad, network down, or similar',
+                    ex
+                );
             });
     };
+
+
+    //---------------------
+    // runLubuntuSetup
+    //---------------------
+    runLubuntuSetup = () => {
+        const that = this;
+        fetch('/ssh-runner/run-lubuntu-setup')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(json) {
+                console.log('removeKnownHost Function called: ', json.result);
+                that.setState({ responseTop: json.result });
+                return json;
+            })
+            .catch(function(ex) {
+                console.log(
+                    'parsing failed, URL bad, network down, or similar',
+                    ex
+                );
+            });
+    };
+
     //---------------------
     // remove-known-host
     //---------------------
@@ -138,35 +184,115 @@ class App extends Component {
             })
             .then(function(json) {
                 console.log('removeKnownHost Function called: ', json.result);
-                that.setState({ responseBottom : json.result });
+                that.setState({ responseTop: json.result });
                 return json;
             })
             .catch(function(ex) {
-                console.log('parsing failed, URL bad, network down, or similar', ex);
+                console.log(
+                    'parsing failed, URL bad, network down, or similar',
+                    ex
+                );
             });
     };
+
+    //---------------------
+    // get-instance-status
+    //---------------------
+    getInstanceStatus = () => {
+        const that = this;
+        fetch('/get-instance-status')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(json) {
+                console.log('getInstanceStatus Function called: ', json.result);
+                that.setState({ responseTop: json.result });
+                return json;
+            })
+            .catch(function(ex) {
+                console.log(
+                    'parsing failed, URL bad, network down, or similar',
+                    ex
+                );
+            });
+    };
+
+    //---------------------
+    // rebootInstance
+    //---------------------
+    rebootInstance = () => {
+        const that = this;
+        fetch('/reboot-instance')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(json) {
+                console.log('rebootInstance Function called: ', json.result);
+                that.setState({ responseTop: json.result });
+                return json;
+            })
+            .catch(function(ex) {
+                console.log(
+                    'parsing failed, URL bad, network down, or similar',
+                    ex
+                );
+            });
+    };
+
     render() {
         return (
             <div className="App">
-                <LinneHeader/>
+                <LinneHeader />
                 <main>
                     <section>
                         <button onClick={this.queryServer}>Bar</button>
-                        <p>
-                            state: {this.state.status} file: {this.state.file}
-                        </p>
+                        <pre>
+                            state: {this.state.status}
+                        </pre>
                     </section>
+
+                    <hr />
                     <section>
-                        <button onClick={this.createEducate	}>Create with AWS Educate Account</button>
-                        <button onClick={this.createWithAwsStandardAccount}>Create with AWS Standard Account</button>
-                        <button onClick={this.associateElasticIp}>Associate Elastic Ip</button>
+                        <button onClick={this.createEducate}>
+                            Create with AWS Educate Account
+                        </button>
+                        <button onClick={this.createWithAwsStandardAccount}>
+                            Create with AWS Standard Account
+                        </button>
+                        <button onClick={this.associateElasticIp}>
+                            Associate Elastic Ip
+                        </button>
+                    </section>
+
+                    <hr />
+                    <section>
                         <pre>state: {this.state.responseTop}</pre>
                     </section>
+
+                    <hr />
                     <section>
-                        <button onClick={this.copyGetStarted}>Copy the GetStarted Script</button>
-                        <button onClick={this.runGetStarted}>Run the GetStarted Script</button>
-                        <button onClick={this.removeKnownHost}>Remove from KnownHost</button>
-                        <pre>state: {this.state.responseBottom}</pre>
+                        <button onClick={this.copyGetStarted}>
+                            Copy the GetStarted Script
+                        </button>
+                        <button onClick={this.runGetStarted}>
+                            Run the GetStarted Script
+                        </button>
+                        <button onClick={this.runLubuntuSetup}>
+                            Run the LubuntuSetup Script
+                        </button>
+                    </section>
+
+                    <hr />
+                    <section>
+                        <button onClick={this.removeKnownHost}>
+                            Remove from KnownHost
+                        </button>
+                        <button onClick={this.getInstanceStatus}>
+                            Get Instance Status
+                        </button>
+                        <button onClick={this.rebootInstance}>
+                            Reboot Instance
+                        </button>
                     </section>
                 </main>
             </div>
