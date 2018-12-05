@@ -213,7 +213,12 @@ router.get('/run-get-started', (request, response) => {
 
     getSshIp()
         .then(result => {
-            var message = {'result': 'run-get-started  SUCCESS', 'hostName': result.hostName, 'idFile': result.identityFile };
+            var message = {
+                'result': 'SUCCESS',
+                'route': request.route.path,
+                'hostName': result.hostName,
+                'idFile': result.identityFile
+            };
             console.log('run-get-started  calledin SSH-RUNNER:\n' + JSON.stringify(message, null, 4));
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
@@ -231,7 +236,12 @@ router.get('/run-lubuntu-setup', (request, response) => {
 
     getSshIp()
         .then(result => {
-            var message = {'result': 'run-lubuntu-setup SUCCESS', 'hostName': result.hostName, 'idFile': result.identityFile };
+            var message = {
+                'result': 'SUCCESS',
+                'route': request.route.path,
+                'hostName': result.hostName,
+                'idFile': result.identityFile
+            };
             console.log('run-lubuntu-setup calledin SSH-RUNNER:\n' + JSON.stringify(message, null, 4));
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })

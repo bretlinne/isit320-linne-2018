@@ -184,7 +184,11 @@ router.get('/copy-get-started', function(request, response) {
     allData = '';
     getSshIp()
         .then(result => {
-            var message = {'result': 'Copy-get-started SUCCESS', 'hostName': result.hostName, 'idFile': result.identityFile };
+            var message = {
+                'result': 'SUCCESS',
+                'route': request.route.path,
+                'hostName': result.hostName,
+                'idFile': result.identityFile };
             console.log('Copy-get-started calledin SCRIPT-PUSHER:\n' + JSON.stringify(message, null, 4));
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
@@ -213,7 +217,12 @@ router.get('/remove-known-host', function(request, response) {
     allData = '';
     getSshIp()
         .then(result => {
-            var message = {'result': 'remove-known-host SUCCESS', 'hostName': result.hostName, 'idFile': result.identityFile };
+            var message = {
+                'result': 'SUCCESS',
+                'route': request.route.path,
+                'hostName': result.hostName,
+                'idFile': result.identityFile
+            };
             console.log('reboot-instance called in SCRIPT-PUSHER:\n' + JSON.stringify(message, null, 4));
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })

@@ -53,7 +53,11 @@ router.get('/foo', function(request, response) {
 router.get('/create-educate', function(request, response) {
     getSshIp()
         .then(result => {
-            var message = {'result': 'create-educate SUCCESS', 'hostName': result.hostName, 'idFile': result.identityFile };
+            var message = {
+                'result': 'SUCCESS',
+                'route': request.route.path,
+                'hostName': result.hostName,
+                'idFile': result.identityFile };
             console.log('create-educate called in INDEX:\n' + JSON.stringify(message, null, 4));
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
@@ -67,7 +71,12 @@ router.get('/create-educate', function(request, response) {
 router.get('/create-standard', function(request, response) {
     getSshIp()
         .then(result => {
-            var message = {'result': 'create-standard SUCCESS', 'hostName': result.hostName, 'idFile': result.identityFile };
+            var message = {
+                'result': 'SUCCESS',
+                'route': request.route.path,
+                'hostName': result.hostName,
+                'idFile': result.identityFile
+            };
             console.log('create-standard called in INDEX:\n' + JSON.stringify(message, null, 4));
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
@@ -81,7 +90,12 @@ router.get('/create-standard', function(request, response) {
 router.get('/associate-elastic-ip', function(request, response) {
     getSshIp()
         .then(result => {
-            var message = {'result': 'associate-elastic-ip SUCCESS', 'hostName': result.hostName, 'idFile': result.identityFile };
+            var message = {
+                'result': 'SUCCESS',
+                'route': request.route.path,
+                'hostName': result.hostName,
+                'idFile': result.identityFile
+            };
             console.log('associate-elastic-ip called in INDEX:\n' + JSON.stringify(message, null, 4));
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
@@ -95,7 +109,12 @@ router.get('/associate-elastic-ip', function(request, response) {
 router.get('/reboot-instance', function(request, response) {
     getSshIp()
         .then(result => {
-            var message = {'result': 'reboot-instance SUCCESS', 'hostName': result.hostName, 'idFile': result.identityFile };
+            var message = {
+                'result': 'SUCCESS',
+                'route': request.route.path,
+                'hostName': result.hostName,
+                'idFile': result.identityFile
+            };
             console.log('reboot-instance called in INDEX:\n' + JSON.stringify(message, null, 4));
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
@@ -109,7 +128,12 @@ router.get('/reboot-instance', function(request, response) {
 router.get('/get-instance-status', function(request, response) {
     getSshIp()
         .then(result => {
-            var message = {'result': 'get-instance-status SUCCESS', 'hostName': result.hostName, 'idFile': result.identityFile };
+            var message = {
+                'result': 'SUCCESS',
+                'route': request.route.path,
+                'hostName': result.hostName,
+                'idFile': result.identityFile
+            };
             console.log('get-instance-status called in INDEX:\n' + JSON.stringify(message, null, 4));
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
