@@ -1,0 +1,33 @@
+{
+    "name": "practice-aws-prov",
+    "version": "1.0.0",
+    "description": "A simple Node.js application showing usage of the AWS SDK for Node.js",
+    "main": "edit-package-json.js",
+    "scripts": {
+        "server": "babel-node server/bin/www",
+        "client": "babel-node start-client.js",
+        "lint": "eslint ."
+        "start": "node Menu.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.3",
+        "elven-code": "^4.5.0",
+        "express": "^4.16.4",
+        "aws-sdk": "^2.328.0",
+        "commander": "^2.18.0"
+    },
+    "devDependencies": {
+        "babel-eslint": "^9.0.0",
+        "concurrently": "^4.1.0",
+        "eslint": "^5.6.0",
+        "eslint-config-google": "^0.11.0",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-jsx-a11y": "^6.1.2",
+        "eslint-plugin-react": "^7.11.1"
+    }
+}

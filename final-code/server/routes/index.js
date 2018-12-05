@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+//const getAwsInstanceParams = require('./aws/GetAwsInstanceParams');
+//const createInstance = require('./aws/AwsPromise');
+
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -9,7 +12,16 @@ router.get('/', function(req, res) {
         author: 'Bret Linne'
     });
 });
-
+/*
+//--------------
+//create-educate
+//--------------
+router.get('/create-educate', function(request, response){
+    const awsInstanceParams = getAwsInstanceParams.awsEducate();
+    createInstance(awsInstanceParams);
+    response.send({result: 'success'});
+});
+*/
 router.get('/run-foo', (request, response) => {
     'use strict';
     response.send({ result: 'foo route called' });
