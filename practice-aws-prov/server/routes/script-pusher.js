@@ -241,7 +241,7 @@ router.get('/remove-known-host', function(request, response) {
             response.send(err);
         });
         */
-    response.send({result: 'REMOVE KNOWN HOST ROUTER success'});
+    response.send({result: 'REMOVE KNOWN HOST ROUTER success', query: request.query});
 });
 
 

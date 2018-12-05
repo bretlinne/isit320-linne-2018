@@ -103,7 +103,7 @@ router.get('/associate-elastic-ip', function(request, response) {
             console.log(err);
             response.send(err);
         });
-    response.send({result: 'ASSOCIATE ELASTIC IP ROUTER success'});
+    response.send({result: 'ASSOCIATE ELASTIC IP ROUTER success', query: request.query});
 });
 
 router.get('/reboot-instance', function(request, response) {
@@ -141,7 +141,7 @@ router.get('/get-instance-status', function(request, response) {
             console.log(err);
             response.send(err);
         });
-    response.send({result: 'GET INSTANCE STATUS ROUTER success'});
+    response.send({result: 'GET INSTANCE STATUS ROUTER success', query: request.query});
 });
 module.exports = router;
 

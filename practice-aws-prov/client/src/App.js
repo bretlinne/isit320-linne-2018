@@ -86,14 +86,15 @@ class App extends Component {
     //---------------------
     associateElasticIp = () => {
         const that = this;
-        fetch('/associate-elastic-ip')
+        fetch('/associate-elastic-ip?instanceId=xxx&allocationId=yyy&region=zzz')
             .then(function(response) {
                 return response.json();
             })
             .then(function(json) {
                 console.log(
                     'associateElasticIp Function called: ',
-                    json.result
+                    json.result,
+                    JSON.stringify(json.query)
                 );
                 that.setState({ responseTop: json.result });
                 return json;
@@ -178,12 +179,16 @@ class App extends Component {
     //---------------------
     removeKnownHost = () => {
         const that = this;
-        fetch('/script-pusher/remove-known-host')
+        fetch('/script-pusher/remove-known-host?ec2Ip=xxx.xxx.xxx.xxx')
             .then(function(response) {
                 return response.json();
             })
             .then(function(json) {
-                console.log('removeKnownHost Function called: ', json.result);
+                console.log(
+                    'removeKnownHost Function called: ',
+                    json.result,
+                    JSON.stringify(json.query)
+                );
                 that.setState({ responseTop: json.result });
                 return json;
             })
@@ -200,12 +205,16 @@ class App extends Component {
     //---------------------
     getInstanceStatus = () => {
         const that = this;
-        fetch('/get-instance-status')
+        fetch('/get-instance-status?instanceId=xxx')
             .then(function(response) {
                 return response.json();
             })
             .then(function(json) {
-                console.log('getInstanceStatus Function called: ', json.result);
+                console.log(
+                    'getInstanceStatus Function called: ',
+                    json.result,
+                    JSON.stringify(json.query)
+                );
                 that.setState({ responseTop: json.result });
                 return json;
             })
