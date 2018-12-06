@@ -158,7 +158,7 @@ describe('Test index.js', function() {
     });
 
     //get-instance-status EXPECTS SPECIFIC RESULTS
-    it.only('COMPLEX TEST: /get-instance-status has specific results', function(done) {
+    it('COMPLEX TEST: /get-instance-status has specific results', function(done) {
         this.timeout(longTimeout);
         let pInstanceId= 'i-07109de9a6bb1ec7a';
         request(app)
@@ -181,7 +181,7 @@ describe('Test index.js', function() {
     });
 
     //associate-ELASTIC-IP EXPECTS SPECIFIC RESULTS
-    it.only('COMPLEX TEST: /associate-elastic-ip has specific results', function(done) {
+    it('COMPLEX TEST: /associate-elastic-ip has specific results', function(done) {
         this.timeout(longTimeout);
         let pInstanceId= 'i-07109de9a6bb1ec7a';
         let pAllocationId = 'standard';
