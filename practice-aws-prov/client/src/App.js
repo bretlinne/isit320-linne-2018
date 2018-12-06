@@ -78,10 +78,12 @@ class App extends Component {
                     responseTop: json.result,
                     Route: 'Route: ' + json.route,
                     HostAddress: 'HostAddress: ' + json.hostName,
-                    AllocationId: 'AllocationId: ' + json.instanceData.AllocationId,
+                    AllocationId:
+                        'AllocationId: ' + json.instanceData.AllocationId,
                     InstanceId: 'InstanceId: ' + json.instanceData.InstanceId,
                     KeyName: 'KeyName: ' + json.instanceData.KeyName,
-                    Architecture: 'Architecture: ' + json.instanceData.Architecture,
+                    Architecture:
+                        'Architecture: ' + json.instanceData.Architecture,
                     OS: 'OS: ' + json.instanceData.OS
                 });
                 return json;
@@ -113,10 +115,12 @@ class App extends Component {
                     responseTop: json.result,
                     Route: 'Route: ' + json.route,
                     HostAddress: 'HostAddress: ' + json.hostName,
-                    AllocationId: 'AllocationId: ' + json.instanceData.AllocationId,
+                    AllocationId:
+                        'AllocationId: ' + json.instanceData.AllocationId,
                     InstanceId: 'InstanceId: ' + json.instanceData.InstanceId,
                     KeyName: 'KeyName: ' + json.instanceData.KeyName,
-                    Architecture: 'Architecture: ' + json.instanceData.Architecture,
+                    Architecture:
+                        'Architecture: ' + json.instanceData.Architecture,
                     OS: 'OS: ' + json.instanceData.OS
                 });
                 return json;
@@ -184,7 +188,8 @@ class App extends Component {
                 that.setState({
                     responseTop: json.result,
                     Route: 'Route: ' + json.route,
-                    GenericTrueFalseFlag: 'GetStarted Copied Over: ' + json.scriptCopied
+                    GenericTrueFalseFlag:
+                        'GetStarted Copied Over: ' + json.scriptCopied
                 });
                 return json;
             })
@@ -211,7 +216,8 @@ class App extends Component {
                 that.setState({
                     responseTop: json.result,
                     Route: 'Route: ' + json.route,
-                    GenericTrueFalseFlag: 'GetStarted Executed: ' + json.scriptRunning
+                    GenericTrueFalseFlag:
+                        'GetStarted Executed: ' + json.scriptRunning
                 });
                 return json;
             })
@@ -238,7 +244,8 @@ class App extends Component {
                 that.setState({
                     responseTop: json.result,
                     Route: 'Route: ' + json.route,
-                    GenericTrueFalseFlag: 'LubuntuSetup Executed: ' + json.scriptRunning
+                    GenericTrueFalseFlag:
+                        'LubuntuSetup Executed: ' + json.scriptRunning
                 });
                 return json;
             })
@@ -256,7 +263,7 @@ class App extends Component {
     removeKnownHost = () => {
         const that = this;
         this.clearDataFields();
-        let pEc2Ip= '255.255.255.255';
+        let pEc2Ip = '255.255.255.255';
         fetch(`/script-pusher/remove-known-host?ec2Ip=${pEc2Ip}`)
             .then(function(response) {
                 return response.json();
@@ -288,7 +295,7 @@ class App extends Component {
     getInstanceStatus = () => {
         const that = this;
         this.clearDataFields();
-        let pInstanceId= 'i-07109de9a6bb1ec7a';
+        let pInstanceId = 'i-07109de9a6bb1ec7a';
         fetch(`/get-instance-status?instanceId=${pInstanceId}`)
             .then(function(response) {
                 return response.json();

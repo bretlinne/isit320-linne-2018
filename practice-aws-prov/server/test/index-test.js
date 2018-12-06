@@ -77,9 +77,7 @@ describe('Test index.js', function() {
             .then(result => {
                 assert.equal(result.body.result, 'success');
                 assert.equal(result.body.exitCode, exitCode);
-                const present = result.body.route.includes(
-                    '/create-educate'
-                );
+                const present = result.body.route.includes('/create-educate');
                 assert.ok(present);
                 done();
             });
@@ -95,9 +93,7 @@ describe('Test index.js', function() {
             .then(result => {
                 assert.equal(result.body.result, 'success');
                 assert.equal(result.body.exitCode, exitCode);
-                const present = result.body.route.includes(
-                    '/create-standard'
-                );
+                const present = result.body.route.includes('/create-standard');
                 assert.ok(present);
                 done();
             });
@@ -131,9 +127,7 @@ describe('Test index.js', function() {
             .then(result => {
                 assert.equal(result.body.result, 'success');
                 assert.equal(result.body.exitCode, exitCode);
-                const present = result.body.route.includes(
-                    '/reboot-instance'
-                );
+                const present = result.body.route.includes('/reboot-instance');
                 assert.ok(present);
                 done();
             });
@@ -160,7 +154,7 @@ describe('Test index.js', function() {
     //get-instance-status EXPECTS SPECIFIC RESULTS
     it('COMPLEX TEST: /get-instance-status has specific results', function(done) {
         this.timeout(longTimeout);
-        let pInstanceId= 'i-07109de9a6bb1ec7a';
+        let pInstanceId = 'i-07109de9a6bb1ec7a';
         request(app)
             .get(`/get-instance-status?instanceId=${pInstanceId}`)
             .set('Accept', 'application/json')
@@ -183,11 +177,13 @@ describe('Test index.js', function() {
     //associate-ELASTIC-IP EXPECTS SPECIFIC RESULTS
     it('COMPLEX TEST: /associate-elastic-ip has specific results', function(done) {
         this.timeout(longTimeout);
-        let pInstanceId= 'i-07109de9a6bb1ec7a';
+        let pInstanceId = 'i-07109de9a6bb1ec7a';
         let pAllocationId = 'standard';
         let pRegion = 'west';
         request(app)
-            .get(`/associate-elastic-ip?instanceId=${pInstanceId}&allocationId=${pAllocationId}&region=${pRegion}`)
+            .get(
+                `/associate-elastic-ip?instanceId=${pInstanceId}&allocationId=${pAllocationId}&region=${pRegion}`
+            )
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(200)

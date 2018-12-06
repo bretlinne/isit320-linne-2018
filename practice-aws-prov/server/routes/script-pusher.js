@@ -203,7 +203,7 @@ router.get('/copy-get-started', function(request, response) {
                 'Copy-get-started calledin SCRIPT-PUSHER:\n' +
                     JSON.stringify(message, null, 4)
             );
-            response.send( message );
+            response.send(message);
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
@@ -241,7 +241,7 @@ router.get('/remove-known-host', function(request, response) {
                 'remove-known-host called in SCRIPT-PUSHER:\n' +
                     JSON.stringify(message, null, 4)
             );
-            response.send( message );
+            response.send(message);
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {

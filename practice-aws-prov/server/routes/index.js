@@ -61,7 +61,7 @@ router.get('/create-educate', function(request, response) {
                 KeyName: result.identityFile,
                 Architecture: 't2.micro',
                 OS: 'ubuntu'
-            }
+            };
             var message = {
                 result: 'success',
                 route: request.route.path,
@@ -74,14 +74,13 @@ router.get('/create-educate', function(request, response) {
                 'create-educate called in INDEX:\n' +
                     JSON.stringify(message, null, 4)
             );
-            response.send( message );
+            response.send(message);
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
             console.log(err);
             response.send(err);
         });
-
 });
 
 router.get('/create-standard', function(request, response) {
@@ -93,7 +92,7 @@ router.get('/create-standard', function(request, response) {
                 KeyName: result.identityFile,
                 Architecture: 't2.micro',
                 OS: 'ubuntu'
-            }
+            };
             var message = {
                 result: 'success',
                 route: request.route.path,
@@ -106,7 +105,7 @@ router.get('/create-standard', function(request, response) {
                 'create-standard called in INDEX:\n' +
                     JSON.stringify(message, null, 4)
             );
-            response.send( message );
+            response.send(message);
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
@@ -132,7 +131,7 @@ router.get('/associate-elastic-ip', function(request, response) {
                 'associate-elastic-ip called in INDEX:\n' +
                     JSON.stringify(message, null, 4)
             );
-            response.send( message );
+            response.send(message);
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
@@ -156,7 +155,7 @@ router.get('/reboot-instance', function(request, response) {
                 'reboot-instance called in INDEX:\n' +
                     JSON.stringify(message, null, 4)
             );
-            response.send( message );
+            response.send(message);
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
@@ -181,7 +180,7 @@ router.get('/get-instance-status', function(request, response) {
                 'get-instance-status called in INDEX:\n' +
                     JSON.stringify(message, null, 4)
             );
-            response.send( message );
+            response.send(message);
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {

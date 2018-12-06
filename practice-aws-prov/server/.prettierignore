@@ -2,3 +2,7 @@
 **/serviceWorker.js
 **/routes/utilScripts/**
 **/routes/aws/**
+**/public/static/**
+service-worker.js
+precache-manifest.*.js
+**/serviceWorker.js

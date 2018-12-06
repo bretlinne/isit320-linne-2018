@@ -4,3 +4,5 @@ service-worker.js
 precache-manifest.*.js
 **/build/**
 **/serviceWorker.js
+**/public/javascripts/**
+**/public/javascripts/control.js**

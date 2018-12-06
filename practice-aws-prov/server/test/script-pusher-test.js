@@ -36,9 +36,7 @@ describe('Test script-pusher.js', function() {
             .then(result => {
                 assert.equal(result.body.result, 'success');
                 assert.equal(result.body.exitCode, exitCode);
-                const present = result.body.route.includes(
-                    '/copy-get-started'
-                );
+                const present = result.body.route.includes('/copy-get-started');
                 assert.ok(present);
                 done();
             });

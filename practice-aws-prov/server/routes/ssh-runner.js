@@ -232,7 +232,6 @@ router.get('/run-get-started', (request, response) => {
         });
 
     //runGetStarted(hostAddress, response);
-
 });
 
 router.get('/run-lubuntu-setup', (request, response) => {
@@ -250,7 +249,7 @@ router.get('/run-lubuntu-setup', (request, response) => {
                 'run-lubuntu-setup calledin SSH-RUNNER:\n' +
                     JSON.stringify(message, null, 4)
             );
-            response.send( message );
+            response.send(message);
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
@@ -260,7 +259,6 @@ router.get('/run-lubuntu-setup', (request, response) => {
 
     //runLububtuSetup(hostAddress, response);
     //response.send(message);
-
 });
 
 module.exports = router;
