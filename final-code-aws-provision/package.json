@@ -1,5 +1,5 @@
 {
-    "name": "practice-aws-prov",
+    "name": "final-code-aws-provision",
     "version": "1.0.0",
     "description": "A simple Node.js application showing usage of the AWS SDK for Node.js",
     "main": "edit-package-json.js",

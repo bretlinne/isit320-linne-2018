@@ -1,13 +1,13 @@
 [Unit]
-Description=Final project; Aws-provision
+Description=Bret Linne Final
 
 [Service]
 ExecStart=/home/bcuser/npm/bin/npm run start-service
-WorkingDirectory=/home/bcuser/bin/final-aws-provision
+WorkingDirectory=/home/bcuser/bin/final-code-aws-provision
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=final-aws-provision
+SyslogIdentifier=final-code-aws-provision
 User=bcuser
 Group=bcuser
 Environment=NODE_ENV=production

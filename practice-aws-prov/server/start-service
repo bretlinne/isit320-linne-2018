@@ -1,4 +1,0 @@
-#! /bin/bash
-
-sudo systemctl enable final-aws-provision.service
-sudo systemctl start final-aws-provision.service
