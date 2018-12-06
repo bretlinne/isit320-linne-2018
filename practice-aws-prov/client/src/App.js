@@ -8,10 +8,38 @@ class App extends Component {
         super();
         this.state = {
             status: 'waiting for server',
-            responseTop: 'unknown'
+            responseTop: 'unknown',
+            Route: '',
+            HostAddress: '',
+            AllocationId: '',
+            InstanceId: '',
+            KeyName: '',
+            Architecture: '',
+            OS: '',
+            GenericTrueFalseFlag: '',
+            RemovedEc2Ip: '',
+            InstanceStatus: '',
+            Region: ''
         };
     }
 
+    clearDataFields = () => {
+        const that = this;
+        that.setState({
+            status: 'waiting for server',
+            Route: '',
+            HostAddress: '',
+            AllocationId: '',
+            InstanceId: '',
+            KeyName: '',
+            Architecture: '',
+            OS: '',
+            GenericTrueFalseFlag: '',
+            RemovedEc2Ip: '',
+            InstanceStatus: '',
+            Region: ''
+        });
+    };
     //---------------------
     // FOO
     //---------------------
@@ -39,14 +67,23 @@ class App extends Component {
     //---------------------
     createEducate = () => {
         const that = this;
-
+        this.clearDataFields();
         fetch('/create-educate')
             .then(function(response) {
                 return response.json();
             })
             .then(function(json) {
                 console.log('createEducate Function called: ', json.result);
-                that.setState({ responseTop: json.result });
+                that.setState({
+                    responseTop: json.result,
+                    Route: 'Route: ' + json.route,
+                    HostAddress: 'HostAddress: ' + json.hostName,
+                    AllocationId: 'AllocationId: ' + json.instanceData.AllocationId,
+                    InstanceId: 'InstanceId: ' + json.instanceData.InstanceId,
+                    KeyName: 'KeyName: ' + json.instanceData.KeyName,
+                    Architecture: 'Architecture: ' + json.instanceData.Architecture,
+                    OS: 'OS: ' + json.instanceData.OS
+                });
                 return json;
             })
             .catch(function(ex) {
@@ -62,6 +99,7 @@ class App extends Component {
     //---------------------
     createWithAwsStandardAccount = () => {
         const that = this;
+        this.clearDataFields();
         fetch('/create-standard')
             .then(function(response) {
                 return response.json();
@@ -71,7 +109,16 @@ class App extends Component {
                     'createWithAwsStandardAccount Function called: ',
                     json.result
                 );
-                that.setState({ responseTop: json.result });
+                that.setState({
+                    responseTop: json.result,
+                    Route: 'Route: ' + json.route,
+                    HostAddress: 'HostAddress: ' + json.hostName,
+                    AllocationId: 'AllocationId: ' + json.instanceData.AllocationId,
+                    InstanceId: 'InstanceId: ' + json.instanceData.InstanceId,
+                    KeyName: 'KeyName: ' + json.instanceData.KeyName,
+                    Architecture: 'Architecture: ' + json.instanceData.Architecture,
+                    OS: 'OS: ' + json.instanceData.OS
+                });
                 return json;
             })
             .catch(function(ex) {
@@ -81,13 +128,18 @@ class App extends Component {
                 );
             });
     };
+
     //---------------------
     // associate-elastic-ip
     //---------------------
     associateElasticIp = () => {
         const that = this;
+        this.clearDataFields();
+        let pInstanceId = 'i-07109de9a6bb1ec7a';
+        let pAllocationId = 'standard';
+        let pRegion = 'west';
         fetch(
-            '/associate-elastic-ip?instanceId=xxx&allocationId=yyy&region=zzz'
+            `/associate-elastic-ip?instanceId=${pInstanceId}&allocationId=${pAllocationId}&region=${pRegion}`
         )
             .then(function(response) {
                 return response.json();
@@ -98,7 +150,15 @@ class App extends Component {
                     json.result,
                     JSON.stringify(json.query)
                 );
-                that.setState({ responseTop: json.result });
+                that.setState({
+                    responseTop: json.result,
+                    Route: 'Route: ' + json.route,
+                    HostAddress: 'HostName: ' + json.hostName,
+                    KeyName: 'KeyName: ' + json.idFile,
+                    AllocationId: 'AllocationId: ' + json.allocationId,
+                    InstanceId: 'InstanceId: ' + json.instanceId,
+                    Region: 'Region: ' + json.region
+                });
                 return json;
             })
             .catch(function(ex) {
@@ -114,13 +174,18 @@ class App extends Component {
     //---------------------
     copyGetStarted = () => {
         const that = this;
+        this.clearDataFields();
         fetch('/script-pusher/copy-get-started')
             .then(function(response) {
                 return response.json();
             })
             .then(function(json) {
                 console.log('copyGetStarted Function called: ', json.result);
-                that.setState({ responseTop: json.result });
+                that.setState({
+                    responseTop: json.result,
+                    Route: 'Route: ' + json.route,
+                    GenericTrueFalseFlag: 'GetStarted Copied Over: ' + json.scriptCopied
+                });
                 return json;
             })
             .catch(function(ex) {
@@ -136,13 +201,18 @@ class App extends Component {
     //---------------------
     runGetStarted = () => {
         const that = this;
+        this.clearDataFields();
         fetch('/ssh-runner/run-get-started')
             .then(function(response) {
                 return response.json();
             })
             .then(function(json) {
                 console.log('runGetStarted Function called: ', json.result);
-                that.setState({ responseTop: json.result });
+                that.setState({
+                    responseTop: json.result,
+                    Route: 'Route: ' + json.route,
+                    GenericTrueFalseFlag: 'GetStarted Executed: ' + json.scriptRunning
+                });
                 return json;
             })
             .catch(function(ex) {
@@ -158,13 +228,18 @@ class App extends Component {
     //---------------------
     runLubuntuSetup = () => {
         const that = this;
+        this.clearDataFields();
         fetch('/ssh-runner/run-lubuntu-setup')
             .then(function(response) {
                 return response.json();
             })
             .then(function(json) {
                 console.log('removeKnownHost Function called: ', json.result);
-                that.setState({ responseTop: json.result });
+                that.setState({
+                    responseTop: json.result,
+                    Route: 'Route: ' + json.route,
+                    GenericTrueFalseFlag: 'LubuntuSetup Executed: ' + json.scriptRunning
+                });
                 return json;
             })
             .catch(function(ex) {
@@ -180,7 +255,9 @@ class App extends Component {
     //---------------------
     removeKnownHost = () => {
         const that = this;
-        fetch('/script-pusher/remove-known-host?ec2Ip=xxx.xxx.xxx.xxx')
+        this.clearDataFields();
+        let pEc2Ip= '255.255.255.255';
+        fetch(`/script-pusher/remove-known-host?ec2Ip=${pEc2Ip}`)
             .then(function(response) {
                 return response.json();
             })
@@ -190,7 +267,11 @@ class App extends Component {
                     json.result,
                     JSON.stringify(json.query)
                 );
-                that.setState({ responseTop: json.result });
+                that.setState({
+                    responseTop: json.result,
+                    Route: 'Route: ' + json.route,
+                    RemovedEc2Ip: 'Removed Ec2Ip: ' + json.ec2Ip
+                });
                 return json;
             })
             .catch(function(ex) {
@@ -206,7 +287,9 @@ class App extends Component {
     //---------------------
     getInstanceStatus = () => {
         const that = this;
-        fetch('/get-instance-status?instanceId=xxx')
+        this.clearDataFields();
+        let pInstanceId= 'i-07109de9a6bb1ec7a';
+        fetch(`/get-instance-status?instanceId=${pInstanceId}`)
             .then(function(response) {
                 return response.json();
             })
@@ -216,7 +299,12 @@ class App extends Component {
                     json.result,
                     JSON.stringify(json.query)
                 );
-                that.setState({ responseTop: json.result });
+                that.setState({
+                    responseTop: json.result,
+                    Route: 'Route: ' + json.route,
+                    InstanceStatus: 'Instance Status: ' + json.instanceStatus,
+                    InstanceId: 'Instance ID: ' + json.instanceId
+                });
                 return json;
             })
             .catch(function(ex) {
@@ -232,13 +320,18 @@ class App extends Component {
     //---------------------
     rebootInstance = () => {
         const that = this;
+        this.clearDataFields();
         fetch('/reboot-instance')
             .then(function(response) {
                 return response.json();
             })
             .then(function(json) {
                 console.log('rebootInstance Function called: ', json.result);
-                that.setState({ responseTop: json.result });
+                that.setState({
+                    responseTop: json.result,
+                    Route: 'Route: ' + json.route,
+                    GenericTrueFalseFlag: 'Rebooting: ' + json.reboot
+                });
                 return json;
             })
             .catch(function(ex) {
@@ -275,6 +368,17 @@ class App extends Component {
                     <hr />
                     <section>
                         <pre>state: {this.state.responseTop}</pre>
+                        <pre>{this.state.Route}</pre>
+                        <pre>{this.state.HostAddress}</pre>
+                        <pre>{this.state.AllocationId}</pre>
+                        <pre>{this.state.InstanceId}</pre>
+                        <pre>{this.state.KeyName}</pre>
+                        <pre>{this.state.Architecture}</pre>
+                        <pre>{this.state.OS}</pre>
+                        <pre>{this.state.GenericTrueFalseFlag}</pre>
+                        <pre>{this.state.RemovedEc2Ip}</pre>
+                        <pre>{this.state.InstanceStatus}</pre>
+                        <pre>{this.state.Region}</pre>
                     </section>
 
                     <hr />

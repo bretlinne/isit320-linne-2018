@@ -209,20 +209,21 @@ router.get('/cpu-info', (request, response) => {
 });
 
 router.get('/run-get-started', (request, response) => {
-    allData = '';
-
     getSshIp()
         .then(result => {
             var message = {
-                result: 'SUCCESS',
+                result: 'success',
                 route: request.route.path,
                 hostName: result.hostName,
-                idFile: result.identityFile
+                idFile: result.identityFile,
+                scriptRunning: 'True',
+                exitCode: 0
             };
             console.log(
                 'run-get-started  calledin SSH-RUNNER:\n' +
                     JSON.stringify(message, null, 4)
             );
+            response.send(message);
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
@@ -231,24 +232,25 @@ router.get('/run-get-started', (request, response) => {
         });
 
     //runGetStarted(hostAddress, response);
-    response.send({ result: 'RUN GET STARTED ROUTER success' });
+
 });
 
 router.get('/run-lubuntu-setup', (request, response) => {
-    allData = '';
-
     getSshIp()
         .then(result => {
             var message = {
-                result: 'SUCCESS',
+                result: 'success',
                 route: request.route.path,
                 hostName: result.hostName,
-                idFile: result.identityFile
+                idFile: result.identityFile,
+                scriptRunning: 'True',
+                exitCode: 0
             };
             console.log(
                 'run-lubuntu-setup calledin SSH-RUNNER:\n' +
                     JSON.stringify(message, null, 4)
             );
+            response.send( message );
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
@@ -258,7 +260,7 @@ router.get('/run-lubuntu-setup', (request, response) => {
 
     //runLububtuSetup(hostAddress, response);
     //response.send(message);
-    response.send({ result: 'RUN LUBUNTU SETUP ROUTER success' });
+
 });
 
 module.exports = router;

@@ -55,116 +55,138 @@ router.get('/foo', function(request, response) {
 router.get('/create-educate', function(request, response) {
     getSshIp()
         .then(result => {
+            var pInstanceData = {
+                InstanceId: 'i-07109de9a6bb1ec7a',
+                AllocationId: 'educate',
+                KeyName: result.identityFile,
+                Architecture: 't2.micro',
+                OS: 'ubuntu'
+            }
             var message = {
-                result: 'SUCCESS',
+                result: 'success',
                 route: request.route.path,
                 hostName: result.hostName,
-                idFile: result.identityFile
+                idFile: result.identityFile,
+                instanceData: pInstanceData,
+                exitCode: 0
             };
             console.log(
                 'create-educate called in INDEX:\n' +
                     JSON.stringify(message, null, 4)
             );
+            response.send( message );
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
             console.log(err);
             response.send(err);
         });
-    response.send({ result: 'CREATE-EDUCATE ROUTER success' });
+
 });
 
 router.get('/create-standard', function(request, response) {
     getSshIp()
         .then(result => {
+            var pInstanceData = {
+                InstanceId: 'i-07109de9a6bb1ec7a',
+                AllocationId: 'standard',
+                KeyName: result.identityFile,
+                Architecture: 't2.micro',
+                OS: 'ubuntu'
+            }
             var message = {
-                result: 'SUCCESS',
+                result: 'success',
                 route: request.route.path,
                 hostName: result.hostName,
-                idFile: result.identityFile
+                idFile: result.identityFile,
+                instanceData: pInstanceData,
+                exitCode: 0
             };
             console.log(
                 'create-standard called in INDEX:\n' +
                     JSON.stringify(message, null, 4)
             );
+            response.send( message );
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
             console.log(err);
             response.send(err);
         });
-    response.send({ result: 'CREATE-STANDARD ROUTER success' });
 });
 
 router.get('/associate-elastic-ip', function(request, response) {
     getSshIp()
         .then(result => {
             var message = {
-                result: 'SUCCESS',
+                result: 'success',
                 route: request.route.path,
                 hostName: result.hostName,
-                idFile: result.identityFile
+                idFile: result.identityFile,
+                region: request.query.region,
+                allocationId: request.query.allocationId,
+                instanceId: request.query.instanceId,
+                exitCode: 0
             };
             console.log(
                 'associate-elastic-ip called in INDEX:\n' +
                     JSON.stringify(message, null, 4)
             );
+            response.send( message );
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
             console.log(err);
             response.send(err);
         });
-    response.send({
-        result: 'ASSOCIATE ELASTIC IP ROUTER success',
-        query: request.query
-    });
 });
 
 router.get('/reboot-instance', function(request, response) {
     getSshIp()
         .then(result => {
             var message = {
-                result: 'SUCCESS',
+                result: 'success',
                 route: request.route.path,
                 hostName: result.hostName,
-                idFile: result.identityFile
+                idFile: result.identityFile,
+                reboot: 'True',
+                exitCode: 0
             };
             console.log(
                 'reboot-instance called in INDEX:\n' +
                     JSON.stringify(message, null, 4)
             );
+            response.send( message );
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
             console.log(err);
             response.send(err);
         });
-    response.send({ result: 'REBOOT INSTANCE ROUTER success' });
 });
 
 router.get('/get-instance-status', function(request, response) {
     getSshIp()
         .then(result => {
             var message = {
-                result: 'SUCCESS',
+                result: 'success',
                 route: request.route.path,
                 hostName: result.hostName,
-                idFile: result.identityFile
+                idFile: result.identityFile,
+                instanceStatus: 'Running',
+                instanceId: request.query.instanceId,
+                exitCode: 0
             };
             console.log(
                 'get-instance-status called in INDEX:\n' +
                     JSON.stringify(message, null, 4)
             );
+            response.send( message );
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
             console.log(err);
             response.send(err);
         });
-    response.send({
-        result: 'GET INSTANCE STATUS ROUTER success',
-        query: request.query
-    });
 });
 module.exports = router;

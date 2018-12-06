@@ -192,15 +192,18 @@ router.get('/copy-get-started', function(request, response) {
     getSshIp()
         .then(result => {
             var message = {
-                result: 'SUCCESS',
+                result: 'success',
                 route: request.route.path,
                 hostName: result.hostName,
-                idFile: result.identityFile
+                idFile: result.identityFile,
+                scriptCopied: 'True',
+                exitCode: 0
             };
             console.log(
                 'Copy-get-started calledin SCRIPT-PUSHER:\n' +
                     JSON.stringify(message, null, 4)
             );
+            response.send( message );
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
@@ -219,7 +222,6 @@ router.get('/copy-get-started', function(request, response) {
             response.send(err);
         });
         */
-    response.send({ result: 'COPY GET STARTED ROUTER success' });
 });
 
 router.get('/remove-known-host', function(request, response) {
@@ -228,15 +230,18 @@ router.get('/remove-known-host', function(request, response) {
     getSshIp()
         .then(result => {
             var message = {
-                result: 'SUCCESS',
+                result: 'success',
                 route: request.route.path,
                 hostName: result.hostName,
-                idFile: result.identityFile
+                idFile: result.identityFile,
+                ec2Ip: request.query.ec2Ip,
+                exitCode: 0
             };
             console.log(
-                'reboot-instance called in SCRIPT-PUSHER:\n' +
+                'remove-known-host called in SCRIPT-PUSHER:\n' +
                     JSON.stringify(message, null, 4)
             );
+            response.send( message );
             //runCpuInfoRemote(result.hostName, result.identityFile, response);
         })
         .catch(err => {
@@ -254,10 +259,6 @@ router.get('/remove-known-host', function(request, response) {
             response.send(err);
         });
         */
-    response.send({
-        result: 'REMOVE KNOWN HOST ROUTER success',
-        query: request.query
-    });
 });
 
 module.exports = router;
