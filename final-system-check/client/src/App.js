@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
-import LinneHeader from "./LinneHeader";
+import LinneHeader from './LinneHeader';
 import RadioLocal from './RadioLocal';
 
 class App extends Component {
     render() {
         return (
             <div className="App">
-                <LinneHeader/>
+                <LinneHeader />
                 <main>
-                    <RadioLocal/>
+                    <RadioLocal />
                 </main>
                 <footer>
                     <p>&copy; by Bret Linne</p>

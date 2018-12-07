@@ -40,7 +40,6 @@ const runSystemTool = () => {
 };
 const runScript = script => {
     return new Promise(function(resolve, reject) {
-
         console.log('Run CpuInfo on LocalSystem', SETUP_LINUXBOX);
 
         //const pushScript = spawn(process.env.SETUP_LINUXBOX + '/CpuInfo');
