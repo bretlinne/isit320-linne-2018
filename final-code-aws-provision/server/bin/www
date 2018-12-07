@@ -12,7 +12,8 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.SERVER_PORT || '30033');
+var port = normalizePort(process.env.SERVER_PORT || '30026');
+var port = normalizePort(process.env.AWS_PROV_PORT || '30032');
 app.set('port', port);
 
 /**
