@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo systemctl stop final-system-check.service
+sudo systemctl disable final-system-check.service
