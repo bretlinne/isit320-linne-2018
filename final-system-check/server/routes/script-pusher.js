@@ -6,6 +6,26 @@ const uptimePath = '/usr/bin/uptime';
 const SETUP_LINUXBOX = '/home/bcuser/Git/JsObjects/Utilities/SetupLinuxBox';
 let allData = '';
 
+const check = (request, response, next) => {
+    console.log('REQUEST CHECK CALLED', request.query);
+    const validOptions = ['CpuInfo', 'VersionCheck', 'uptime'];
+    if (request.query.script) {
+        console.log('INSIDE REQUEST SCRIPT');
+        if (!validOptions.includes(request.query.script)) {
+            console.log('INSIDE REQUEST INVALID OPTION');
+            response.send({
+                result: 'error',
+                error: 'Invalid Option: ' + request.query.script,
+                script: request.query.script
+            });
+            return;
+        }
+    }
+    next();
+};
+
+router.use(check);
+
 const runSystemTool = () => {
     return new Promise(function(resolve, reject) {
         console.log('Run Uptime on LocalSystem', uptimePath);
@@ -76,7 +96,8 @@ const runScript = script => {
 };
 
 router.get('/run-script', function(request, response) {
-    'use strict';
+    router.use(check);
+    ('use strict');
     console.log('QUERY: ', request.query.script);
     allData = '';
     runScript(request.query.script)
