@@ -7,33 +7,56 @@ YELLOW='\033[1;33m'
 BLUE='\033[1;36m'
 NC='\033[0m'  # NO COLOR
 
+OPEN_PORT_FLAG=false
+
 function checkPorts(){
-    for i in `seq 30025 30035`
-    do
+	for i in `seq 30025 30035`
+	do
 #lsof -t -i:${i}
-        RESULT=`lsof -t -i:${i}`
-        EXITCODE=$?
-        if [ ${EXITCODE} -eq 1 ];then 
-            printf "${BLUE} Port ${i}: closed\n${NC}"
-        else
-	    printf "${LIGHT_RED} Port ${i}: open; Process: ${RESULT}\n${NC}"
-        fi
-    done
+		RESULT=`lsof -t -i:${i}`
+		EXITCODE=$?
+		if [ ${EXITCODE} -eq 1 ];then 
+			printf "${BLUE} Port ${i}: closed\n${NC}"
+		else
+			OPEN_PORT_FLAG=true
+			printf "${LIGHT_RED} Port ${i}: open; Process: ${RESULT}\n${NC}"
+		fi
+	done
+}
+
+function closePort(){
+	if [ "${OPEN_PORT_FLAG}" = false ]; then
+		printf "${YELLOW} There are no open ports to close\n${NC}"
+	else
+		read -p " ${BLUE}Enter the port to close: " eotuyx
+		
+		`kill -9 $(lsof -t -i:${eotuyx})`
+		RESULT=`lsof -t -i:${eotuyx}`
+		EXITCODE=$?
+		if [ ${EXITCODE} -eq 1 ];then 
+			printf "${BLUE} Port ${eotuyx}: closed\n${NC}"
+		else
+			printf "${LIGHT_RED} ERROR; COULD NOT CLOSE PORT ${eotuyx}\n${NC}"
+		fi
+	fi
 }
 
 clear
 
+
 while true; do
-    echo -e ${BLUE}" Menu"
-    echo " *********************************************"
-    printf "${LIGHT_GREEN} a) Scan ports 30025-30035\n"
-    printf "${LIGHT_RED} x) Exit\n"
-    printf "\n$NC"
-    read -p "Please make a selection: " eotuyx
-    case $eotuyx in
-        [Aa]* ) checkPorts; continue;;
-        [XxQq]* ) break;;
-        * ) -e "\n$NC" + "Please answer with a, or x(or q).";;
-    esac
+	echo -e ${BLUE}" Menu"
+	echo " *********************************************"
+	printf "${LIGHT_GREEN} a) Scan ports 30025-30035\n"
+	printf "${LIGHT_GREEN} b) kill port\n"
+	printf "${LIGHT_RED} x) Exit\n"
+	printf "\n$NC"
+	read -p "Please make a selection: " eotuyx
+	case $eotuyx in
+		[Aa]* ) checkPorts; continue;;
+		[Bb]* ) closePort; continue;;
+		[XxQq]* ) break;;
+		* ) -e "\n$NC" + "Please answer with a, or x(or q).";;
+	esac
 done
 
