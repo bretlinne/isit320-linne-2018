@@ -8,7 +8,7 @@ const elfUtils = require('elven-code').elfUtils;
 
 const check = (request, response, next) => {
     console.log('REQUEST CHECK CALLED', request.query);
-    const validOptions = ['CpuInfo', 'VersionCheck', 'uptime'];
+    const validOptions = ['CpuInfo', 'VersionCheck', 'Uptime'];
     if (request.query.script) {
         console.log('INSIDE REQUEST SCRIPT');
         if (!validOptions.includes(request.query.script)) {

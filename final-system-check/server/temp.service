@@ -2,17 +2,17 @@
 Description=Final System Check
 
 [Service]
-ExecStart=/home/ubuntu/npm/bin/npm run start-service
-WorkingDirectory=/home/ubuntu/bin/final-system-check
+ExecStart=/home/bcuser/npm/bin/npm run start-service
+WorkingDirectory=/home/bcuser/bin/final-system-check
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=final-system-check
-User=ubuntu
-Group=ubuntu
+User=bcuser
+Group=bcuser
 Environment=NODE_ENV=production
 Environment=SYSTEM_CHECK_PORT=30034
-Environment=SETUP_LINUXBOX=/home/ubuntu/Git/JsObjects/Utilities/SetupLinuxBox
+Environment=SETUP_LINUXBOX=/home/bcuser/Git/JsObjects/Utilities/SetupLinuxBox
 
 [Install]
 WantedBy=multi-user.target
