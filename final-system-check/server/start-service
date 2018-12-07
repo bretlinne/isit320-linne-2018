@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo systemctl enable final-system-check.service
+sudo systemctl start final-system-check.service
