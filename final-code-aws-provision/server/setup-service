@@ -1,9 +1,9 @@
 #! /bin/bash
 
 function copyService() {
-    sudo cp -v final-code-aws-provision.service /etc/systemd/system/.
-    sudo systemctl enable final-code-aws-provision.service
-    sudo systemctl start final-code-aws-provision.service
+    sudo cp -v final-project-aws-provision.service /etc/systemd/system/.
+    sudo systemctl enable final-project-aws-provision.service
+    sudo systemctl start final-project-aws-provision.service
 }
 
 copyService

@@ -1,18 +1,17 @@
 [Unit]
-Description=System Check Service 02
+Description=Bret Linne Final Project
 
 [Service]
 ExecStart=/home/ubuntu/npm/bin/npm run start-service
-WorkingDirectory=/home/ubuntu/bin/systemcheck02
+WorkingDirectory=/home/ubuntu/bin/final-project-aws-provision
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=systemcheck02
+SyslogIdentifier=final-project-aws-provision
 User=ubuntu
 Group=ubuntu
 Environment=NODE_ENV=production
-Environment=SERVER_PORT=30033
-Environment=SETUP_LINUXBOX=/home/ubuntu/Git/JsObjects/Utilities/SetupLinuxBox
+Environment=SERVER_PORT=30029
 
 [Install]
 WantedBy=multi-user.target

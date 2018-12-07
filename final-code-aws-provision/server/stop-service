@@ -1,4 +1,4 @@
 #! /bin/bash
 
-sudo systemctl stop final-code-aws-provision.service
-sudo systemctl disable final-code-aws-provision.service
+sudo systemctl stop final-project-aws-provision.service
+sudo systemctl disable final-project-aws-provision.service
