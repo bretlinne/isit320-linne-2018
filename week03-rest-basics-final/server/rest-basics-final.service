@@ -1,0 +1,17 @@
+[Unit]
+Description=Final of week03 rest basics
+
+[Service]
+ExecStart=/home/bcuser/npm/bin/npm run start-service
+WorkingDirectory=/home/bcuser/bin/rest-basics-final
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=rest-basics-final
+User=bcuser
+Group=bcuser
+Environment=NODE_ENV=production
+Environment=REST_BASICS_PORT=30027
+
+[Install]
+WantedBy=multi-user.target

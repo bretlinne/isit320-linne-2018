@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo systemctl enable rest-basics-final.service
+sudo systemctl start rest-basics-final.service

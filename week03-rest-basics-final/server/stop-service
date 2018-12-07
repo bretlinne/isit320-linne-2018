@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo systemctl stop rest-basics-final.service
+sudo systemctl disable rest-basics-final.service
