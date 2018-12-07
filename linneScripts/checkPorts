@@ -28,17 +28,22 @@ function closePort(){
 	if [ "${OPEN_PORT_FLAG}" = false ]; then
 		printf "${YELLOW} There are no open ports to close\n${NC}"
 	else
-		read -p " ${BLUE}Enter the port to close: " eotuyx
+		read -p $'\e[1;36m Enter the port to close: \e[0m: ' eotuyx
 		
-		`kill -9 $(lsof -t -i:${eotuyx})`
-		RESULT=`lsof -t -i:${eotuyx}`
-		EXITCODE=$?
-		if [ ${EXITCODE} -eq 1 ];then 
-			printf "${BLUE} Port ${eotuyx}: closed\n${NC}"
+		# check input
+		if ! [[ "${eotuyx}" -ge 30025 && "${eotuyx}" -le 30035 ]]; then
+			printf "${LIGHT_RED} ERROR! Invalid input! Enter a port number in scanned range.\n${NC}"
 		else
-			printf "${LIGHT_RED} ERROR; COULD NOT CLOSE PORT ${eotuyx}\n${NC}"
-		fi
-	fi
+			`kill -9 $(lsof -t -i:${eotuyx})`
+			RESULT=`lsof -t -i:${eotuyx}`
+			EXITCODE=$?
+			if [ ${EXITCODE} -eq 1 ];then 
+				printf "${BLUE} Port ${eotuyx}: closed\n${NC}"
+			else
+				printf "${LIGHT_RED} ERROR; COULD NOT CLOSE PORT ${eotuyx}\n${NC}"
+			fi # end exitCode check
+		fi #end input check
+	fi # end openPort check
 }
 
 clear
@@ -51,7 +56,7 @@ while true; do
 	printf "${LIGHT_GREEN} b) kill port\n"
 	printf "${LIGHT_RED} x) Exit\n"
 	printf "\n$NC"
-	read -p "Please make a selection: " eotuyx
+	read -p " Please make a selection: " eotuyx
 	case $eotuyx in
 		[Aa]* ) checkPorts; continue;;
 		[Bb]* ) closePort; continue;;
