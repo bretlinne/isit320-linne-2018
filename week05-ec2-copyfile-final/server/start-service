@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo systemctl enable week05-ec2-copy-file-final.service
+sudo systemctl start week05-ec2-copy-file-final.service

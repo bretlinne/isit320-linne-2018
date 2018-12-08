@@ -1,0 +1,18 @@
+[Unit]
+Description=final version of ec2 copy file
+
+[Service]
+ExecStart=/home/bcuser/npm/bin/npm run start-service
+WorkingDirectory=/home/bcuser/bin/week05-ec2-copy-file-final
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=week05-ec2-copy-file-final
+User=bcuser
+Group=bcuser
+Environment=NODE_ENV=production
+Environment=EC2_COPY_PORT=30033
+Environment=SETUP_LINUXBOX=/home/ubuntu/Git/JsObjects/Utilities/SetupLinuxBox
+
+[Install]
+WantedBy=multi-user.target
