@@ -29,6 +29,3 @@ public/service-worker.js
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-#systemD
-temp.service

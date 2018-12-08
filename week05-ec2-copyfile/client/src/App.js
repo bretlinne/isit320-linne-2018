@@ -12,6 +12,7 @@ class App extends Component {
             })
             .then(function(json) {
                 console.log('parsed json', json);
+
             })
             .catch(function(ex) {
                 console.log('parsing failed, URL bad, network down, or similar', ex);

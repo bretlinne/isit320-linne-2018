@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo systemctl stop week05-ec2-copy-file-final.service
+sudo systemctl disable week05-ec2-copy-file-final.service
